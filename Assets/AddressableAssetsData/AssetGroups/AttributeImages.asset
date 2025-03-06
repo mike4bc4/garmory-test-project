@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: AttributeImages
+  m_EditorClassIdentifier: 
+  m_GroupName: AttributeImages
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 6ec14564bc064fa45847bf8ecd6aaa1e
+  m_SerializeEntries:
+  - m_GUID: 6bb76f37d45e08c44aa811353cf163d7
+    m_Address: AttributeAttackSpeed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6d5885d893dbbe54c849e2f533502d16
+    m_Address: AttributeCriticalStrikeChance
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4b76181ceadcfdf4db082479ec8d6ec2
+    m_Address: AttributeDefense
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 03baf039dd7900c4cababae1096dae64
+    m_Address: AttributeLifeSteal
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 963178493718eed42a61232fed5e1f40
+    m_Address: AttributeMovementSpeed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f215f239f5297ae4fbc4a5aa6d3e6224
+    m_Address: AttributeDamage
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 23a85a05d8adb2a499ff347c6d093b31
+    m_Address: AttributeHealthPoints
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2852739d4f30a854896ea5c968e1c010
+    m_Address: AttributeLuck
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3100a7786077fff4ebbf6de2020eaad6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b8ddc398ec859cc40a2f56b7bdec9b50, type: 2}
+    - {fileID: 11400000, guid: 149f0c2033629074ba47c8a8df58237c, type: 2}

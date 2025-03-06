@@ -1,0 +1,80 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Styles/Style.uss?fileID=7433441132597879392&amp;guid=59ff6ebf5aed4734baf1100afe3193de&amp;type=3#Style" />
+    <ui:VisualElement name="MainPanel" picking-mode="Ignore" style="flex-grow: 1;">
+        <GameUI.CustomControls.CustomButton name="CharacterButton" style="width: 80px; height: 80px; position: absolute; bottom: 40px; right: 40px;">
+            <ui:Label text="Char" display-tooltip-when-elided="true" picking-mode="Ignore" name="Label" style="flex-grow: 1;" />
+        </GameUI.CustomControls.CustomButton>
+        <ui:VisualElement name="CharacterPanelContainer" picking-mode="Ignore" style="position: absolute; right: 0; left: 0; top: 0; bottom: 0; flex-direction: row-reverse; margin-top: 80px; margin-bottom: 200px;">
+            <ui:VisualElement name="CharacterPanel" style="flex-direction: row; background-color: rgba(255, 255, 255, 0.5);">
+                <ui:VisualElement name="LeftPanel" style="display: flex;">
+                    <ui:VisualElement name="InventoryPanel" style="flex-grow: 1; min-width: 400px; display: flex;">
+                        <ui:VisualElement name="TopBar" style="flex-direction: row; flex-shrink: 0;">
+                            <ui:Label text="Tab Name" display-tooltip-when-elided="true" name="Label" style="flex-grow: 1; -unity-text-align: middle-center;" />
+                            <ui:Button text="X" display-tooltip-when-elided="true" name="CloseButton" style="min-width: 40px; min-height: 40px;" />
+                        </ui:VisualElement>
+                        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" vertical-scroller-visibility="AlwaysVisible" style="flex-grow: 1;">
+                            <ui:VisualElement name="GridContainer" style="flex-grow: 1;" />
+                        </ui:ScrollView>
+                        <ui:VisualElement name="DescriptionPanel" style="height: 30%; min-height: 30%;">
+                            <ui:Label text="Label" display-tooltip-when-elided="true" name="NameLabel" style="-unity-text-align: middle-center;" />
+                            <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" vertical-scroller-visibility="AlwaysVisible" style="flex-grow: 1;">
+                                <ui:VisualElement name="ItemInfoContainer">
+                                    <ui:VisualElement name="ImageElement" style="width: 80px; height: 80px; background-color: rgb(255, 0, 255);" />
+                                    <ui:VisualElement name="StatsContainer" />
+                                </ui:VisualElement>
+                            </ui:ScrollView>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="ControlsPanel">
+                    <GameUI.CustomControls.CustomButton name="InventoryButton" style="width: 80px; height: 80px;">
+                        <ui:Label text="Inv" display-tooltip-when-elided="true" name="Label" style="flex-grow: 1;" />
+                    </GameUI.CustomControls.CustomButton>
+                    <ui:Button text="Spells" display-tooltip-when-elided="true" name="SpellbookButton" style="min-width: 80px; min-height: 80px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="RightPanel" style="min-width: 400px;">
+                    <ui:VisualElement name="TopBar" style="flex-direction: row;">
+                        <ui:Label text="Character Name" display-tooltip-when-elided="true" name="Label" style="flex-grow: 1; -unity-text-align: middle-center;" />
+                        <ui:Button text="X" display-tooltip-when-elided="true" name="CloseButton" style="min-width: 40px; min-height: 40px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Container" style="flex-grow: 1;">
+                        <ui:VisualElement name="EquipmentPanel" style="flex-grow: 1;">
+                            <ui:VisualElement name="GridContainer" style="flex-grow: 1;">
+                                <ui:VisualElement name="Row0" style="flex-direction: row; justify-content: center; margin-bottom: 10px;">
+                                    <ui:VisualElement name="Cell0" style="background-color: rgb(255, 0, 255); min-width: 80px; min-height: 80px; margin-right: 10px;" />
+                                    <ui:VisualElement name="Cell1" style="background-color: rgb(255, 0, 255); min-width: 80px; min-height: 80px; margin-right: 10px;" />
+                                    <ui:VisualElement name="Cell2" style="background-color: rgb(255, 0, 255); min-width: 80px; min-height: 80px;" />
+                                </ui:VisualElement>
+                                <ui:VisualElement name="Row1" style="flex-direction: row; justify-content: center; margin-bottom: 10px;">
+                                    <ui:VisualElement name="Cell0" style="background-color: rgb(255, 0, 255); min-width: 80px; min-height: 80px; margin-right: 10px;" />
+                                    <ui:VisualElement name="Cell1" style="background-color: rgb(255, 0, 255); min-width: 80px; min-height: 80px; margin-right: 10px;" />
+                                    <ui:VisualElement name="Cell2" style="background-color: rgb(255, 0, 255); min-width: 80px; min-height: 80px;" />
+                                </ui:VisualElement>
+                                <ui:VisualElement name="Row2" style="flex-direction: row; justify-content: center;">
+                                    <ui:VisualElement name="Cell0" style="background-color: rgb(255, 0, 255); min-width: 80px; min-height: 80px; margin-right: 10px;" />
+                                    <ui:VisualElement name="Cell1" style="background-color: rgb(255, 0, 255); min-width: 80px; min-height: 80px; margin-right: 10px;" />
+                                    <ui:VisualElement name="Cell2" style="background-color: rgb(255, 0, 255); min-width: 80px; min-height: 80px;" />
+                                </ui:VisualElement>
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                        <ui:VisualElement name="StatsPanel" style="height: 30%;">
+                            <ui:VisualElement name="TopBar">
+                                <ui:Label text="Stats" display-tooltip-when-elided="true" name="Label" style="-unity-text-align: middle-center;" />
+                            </ui:VisualElement>
+                            <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" vertical-scroller-visibility="AlwaysVisible" name="ScrollView" style="flex-grow: 1;">
+                                <ui:VisualElement name="StatControl" style="flex-direction: row;">
+                                    <ui:VisualElement name="StatIcon" style="background-color: rgb(255, 0, 255); min-width: 30px; min-height: 30px; width: 20px; height: 20px;" />
+                                    <ui:Label text="Attack Speed" display-tooltip-when-elided="true" name="StatNameLabel" style="flex-grow: 1; -unity-text-align: middle-left;" />
+                                    <ui:Label text="100" display-tooltip-when-elided="true" name="StatValueLabel" style="-unity-text-align: middle-left;" />
+                                </ui:VisualElement>
+                            </ui:ScrollView>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="TestElement2" style="position: absolute; width: 60px; height: 60px; background-color: rgb(0, 255, 0); top: 724px; left: 724px;" />
+        <ui:VisualElement name="TestElement" style="position: absolute; width: 60px; height: 60px; background-color: rgb(255, 0, 0); top: 748px; left: 744px;" />
+        <ui:VisualElement name="DraggedItemPanel" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

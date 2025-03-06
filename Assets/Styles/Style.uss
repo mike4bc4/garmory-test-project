@@ -1,0 +1,145 @@
+VisualElement {
+}
+
+.grid-container__row {
+    flex-direction: row;
+    padding-left: 10px;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.grid-container__row__cell {
+    min-width: 80px;
+    min-height: 80px;
+    background-color: rgb(255, 0, 255);
+    margin-right: 10px;
+}
+
+.inventory-item-box {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.inventory-item-box__background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("project://database/Assets/Textures/Other/ItemBackgroundIcon.png?fileID=2800000&guid=f79581ff00e2ee64d9f111a9eef4c994&type=3#ItemBackgroundIcon");
+}
+
+.inventory-item-box__rarity {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+.inventory-item-box__rarity--common {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityCommon.png?fileID=2800000&guid=5be4320d448dd9040a0c9abd3f40f100&type=3#ItemRarityCommon");
+}
+
+.inventory-item-box__rarity--uncommon {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityUncommon.png?fileID=2800000&guid=6ea0dbadcf0b28f489fb0a777ef529f4&type=3#ItemRarityUncommon");
+}
+
+.inventory-item-box__rarity--rare {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityRare.png?fileID=2800000&guid=35e96054fbe19d4468494a8ab806345f&type=3#ItemRarityRare");
+}
+
+.inventory-item-box__rarity--epic {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityEpic.png?fileID=2800000&guid=72afd0e677f3d364ba6d5dce08a7b2a1&type=3#ItemRarityEpic");
+}
+
+.inventory-item-box__rarity--legendary {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityLegendary.png?fileID=2800000&guid=5d4d6e1bf40b87c4db405ecb536a1222&type=3#ItemRarityLegendary");
+}
+
+.inventory-item-box__item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.inventory-item-box__selected-image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.inventory-item-box__selected-image--selected {
+    background-color: rgba(0, 255, 0, 0.5);
+}
+
+.draggable-panel__draggable {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80px;
+    height: 80px;
+    right: auto;
+    bottom: auto;
+}
+
+.attribute-control {
+    flex-direction: row;
+    margin-bottom: 8px;
+}
+
+.attribute-control__image {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    background-color: rgba(255, 0, 255, 255);
+}
+
+.attribute-control__label {
+    -unity-text-align: middle-left;
+    margin-left: 8px;
+}
+
+.attribute-control__value {
+    -unity-text-align: middle-left;
+}
+
+.attribute-control__image--damage {
+    background-image: url("project://database/Assets/Textures/Icons/PlayerStatistics/IconAttack.png?fileID=2800000&guid=f215f239f5297ae4fbc4a5aa6d3e6224&type=3#IconAttack");
+}
+
+.attribute-control__image--health-points {
+    background-image: url("project://database/Assets/Textures/Buffs/BuffFullHeal.png?fileID=2800000&guid=23a85a05d8adb2a499ff347c6d093b31&type=3#BuffFullHeal");
+}
+
+.attribute-control__image--defense {
+    background-image: url("project://database/Assets/Textures/Icons/PlayerStatistics/IconDefence.png?fileID=2800000&guid=4b76181ceadcfdf4db082479ec8d6ec2&type=3#IconDefence");
+}
+
+.attribute-control__image--life-steal {
+    background-image: url("project://database/Assets/Textures/Icons/PlayerStatistics/IconLifesteal.png?fileID=2800000&guid=03baf039dd7900c4cababae1096dae64&type=3#IconLifesteal");
+}
+
+.attribute-control__image--critical-strike-chance {
+    background-image: url("project://database/Assets/Textures/Icons/PlayerStatistics/IconCritChance.png?fileID=2800000&guid=6d5885d893dbbe54c849e2f533502d16&type=3#IconCritChance");
+}
+
+.attribute-control__image--attack-speed {
+    background-image: url("project://database/Assets/Textures/Icons/PlayerStatistics/IconAttackSpeed.png?fileID=2800000&guid=6bb76f37d45e08c44aa811353cf163d7&type=3#IconAttackSpeed");
+}
+
+.attribute-control__image--movement-speed {
+    background-image: url("project://database/Assets/Textures/Icons/PlayerStatistics/IconSpeed.png?fileID=2800000&guid=963178493718eed42a61232fed5e1f40&type=3#IconSpeed");
+}
+
+.attribute-control__image--luck {
+    background-image: url("project://database/Assets/Textures/Buffs/BuffShock.png?fileID=2800000&guid=2852739d4f30a854896ea5c968e1c010&type=3#BuffShock");
+}

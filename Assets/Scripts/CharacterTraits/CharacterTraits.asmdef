@@ -1,0 +1,16 @@
+{
+    "name": "CharacterTraits",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a2fe74c5576f79d40ad3ee73363acb01"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
