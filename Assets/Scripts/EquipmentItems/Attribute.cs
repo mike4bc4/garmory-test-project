@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
-namespace CharacterFeatures
+namespace EquipmentItems
 {
-    public abstract class CharacterAttribute
+    public abstract class Attribute
     {
         string m_Name;
 
@@ -28,43 +28,43 @@ namespace CharacterFeatures
             get => m_Value == 0f;
         }
 
-        public CharacterAttribute(string name)
+        public Attribute(string name)
         {
             m_Name = name;
         }
 
         public abstract string GetValueString(bool withSign = false);
 
-        public abstract CharacterAttribute Clone();
+        public abstract Attribute Clone();
     }
 
-    public class NumericCharacterAttribute : CharacterAttribute
+    public class NumericAttribute : Attribute
     {
-        public NumericCharacterAttribute(string name) : base(name) { }
+        public NumericAttribute(string name) : base(name) { }
 
         public override string GetValueString(bool withSign = false)
         {
             return withSign ? string.Format("{0:+0.#;-0.#}", value) : string.Format("{0:0.#}", value);
         }
 
-        public override CharacterAttribute Clone()
+        public override Attribute Clone()
         {
-            return new NumericCharacterAttribute(name) { value = value };
+            return new NumericAttribute(name) { value = value };
         }
     }
 
-    public class PercentageCharacterAttribute : CharacterAttribute
+    public class PercentageAttribute : Attribute
     {
-        public PercentageCharacterAttribute(string name) : base(name) { }
+        public PercentageAttribute(string name) : base(name) { }
 
         public override string GetValueString(bool withSign = false)
         {
             return withSign ? string.Format("{0:+0.#%;-0.#%}", value / 100f) : string.Format("{0:0.#%}", value / 100f);
         }
 
-        public override CharacterAttribute Clone()
+        public override Attribute Clone()
         {
-            return new PercentageCharacterAttribute(name) { value = value };
+            return new PercentageAttribute(name) { value = value };
         }
     }
 }

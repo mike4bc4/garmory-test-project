@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using CharacterFeatures;
 using GameServerUtility;
 using UnityEngine;
 
@@ -30,67 +29,67 @@ namespace EquipmentItems
             get => m_Rarity;
         }
 
-        NumericCharacterAttribute m_Damage;
+        NumericAttribute m_Damage;
 
-        public NumericCharacterAttribute damage
+        public NumericAttribute damage
         {
             get => m_Damage;
         }
 
-        NumericCharacterAttribute m_HealthPoints;
+        NumericAttribute m_HealthPoints;
 
-        public NumericCharacterAttribute healthPoints
+        public NumericAttribute healthPoints
         {
             get => m_HealthPoints;
         }
 
-        NumericCharacterAttribute m_Defense;
+        NumericAttribute m_Defense;
 
-        public NumericCharacterAttribute defense
+        public NumericAttribute defense
         {
             get => m_Defense;
         }
 
-        PercentageCharacterAttribute m_LifeSteal;
+        PercentageAttribute m_LifeSteal;
 
-        public PercentageCharacterAttribute lifeSteal
+        public PercentageAttribute lifeSteal
         {
             get => m_LifeSteal;
         }
 
-        PercentageCharacterAttribute m_CriticalStrikeChance;
+        PercentageAttribute m_CriticalStrikeChance;
 
-        public PercentageCharacterAttribute criticalStrikeChance
+        public PercentageAttribute criticalStrikeChance
         {
             get => m_CriticalStrikeChance;
         }
 
-        PercentageCharacterAttribute m_AttackSpeed;
+        PercentageAttribute m_AttackSpeed;
 
-        public PercentageCharacterAttribute attackSpeed
+        public PercentageAttribute attackSpeed
         {
             get => m_AttackSpeed;
         }
 
-        PercentageCharacterAttribute m_MovementSpeed;
+        PercentageAttribute m_MovementSpeed;
 
-        public PercentageCharacterAttribute movementSpeed
+        public PercentageAttribute movementSpeed
         {
             get => m_MovementSpeed;
         }
 
-        PercentageCharacterAttribute m_Luck;
+        PercentageAttribute m_Luck;
 
-        public PercentageCharacterAttribute luck
+        public PercentageAttribute luck
         {
             get => m_Luck;
         }
 
-        public List<CharacterAttribute> attributes
+        public List<Attribute> attributes
         {
             get
             {
-                var attributes = new List<CharacterAttribute>()
+                var attributes = new List<Attribute>()
                 {
                     m_Damage,
                     m_HealthPoints,
@@ -119,14 +118,14 @@ namespace EquipmentItems
             }
 
             m_Rarity = (Rarity)itemWrapper.Rarity;
-            m_Damage = new NumericCharacterAttribute("Damage") { value = itemWrapper.Damage };
-            m_HealthPoints = new NumericCharacterAttribute("Health Points") { value = itemWrapper.HealthPoints };
-            m_Defense = new NumericCharacterAttribute("Defense") { value = itemWrapper.Defense };
-            m_LifeSteal = new PercentageCharacterAttribute("Life Steal") { value = itemWrapper.LifeSteal };
-            m_CriticalStrikeChance = new PercentageCharacterAttribute("Critical Strike Chance") { value = itemWrapper.CriticalStrikeChance };
-            m_AttackSpeed = new PercentageCharacterAttribute("Attack Speed") { value = itemWrapper.AttackSpeed };
-            m_MovementSpeed = new PercentageCharacterAttribute("Movement Speed") { value = itemWrapper.MovementSpeed };
-            m_Luck = new PercentageCharacterAttribute("Luck") { value = itemWrapper.Luck };
+            m_Damage = new NumericAttribute("Damage") { value = itemWrapper.Damage };
+            m_HealthPoints = new NumericAttribute("Health Points") { value = itemWrapper.HealthPoints };
+            m_Defense = new NumericAttribute("Defense") { value = itemWrapper.Defense };
+            m_LifeSteal = new PercentageAttribute("Life Steal") { value = itemWrapper.LifeSteal };
+            m_CriticalStrikeChance = new PercentageAttribute("Critical Strike Chance") { value = itemWrapper.CriticalStrikeChance };
+            m_AttackSpeed = new PercentageAttribute("Attack Speed") { value = itemWrapper.AttackSpeed };
+            m_MovementSpeed = new PercentageAttribute("Movement Speed") { value = itemWrapper.MovementSpeed };
+            m_Luck = new PercentageAttribute("Luck") { value = itemWrapper.Luck };
         }
     }
 }

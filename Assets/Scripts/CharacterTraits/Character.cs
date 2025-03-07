@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using EquipmentItems;
 using UnityEngine;
 
 namespace CharacterTraits

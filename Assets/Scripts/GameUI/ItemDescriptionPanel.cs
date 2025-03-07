@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using CharacterFeatures;
 using EquipmentItems;
 using ResourcesUtility;
 using UnityEngine;
@@ -56,8 +55,8 @@ namespace GameUI
 
             for (int i = 0; i < item.attributes.Count; i++)
             {
-                CharacterAttribute attribute = item.attributes[i];
-                CharacterAttribute compareAttribute = compareItem?.attributes[i];
+                Attribute attribute = item.attributes[i];
+                Attribute compareAttribute = compareItem?.attributes[i];
                 if (!attribute.isEmpty)
                 {
                     m_StatsContainer.Add(new AttributeControl()

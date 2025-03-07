@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using CharacterFeatures;
+using EquipmentItems;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.TextCore.Text;
@@ -24,17 +24,17 @@ namespace GameUI
         Label m_ValueLabel;
         Label m_ValueChangeLabel;
 
-        CharacterAttribute m_Attribute;
+        EquipmentItems.Attribute m_Attribute;
 
-        public CharacterAttribute attribute
+        public EquipmentItems.Attribute attribute
         {
             get => m_Attribute;
             set => SetAttribute(value);
         }
 
-        CharacterAttribute m_CompareAttribute;
+        EquipmentItems.Attribute m_CompareAttribute;
 
-        public CharacterAttribute compareAttribute
+        public EquipmentItems.Attribute compareAttribute
         {
             get => m_CompareAttribute;
             set => SetCompareAttribute(value);
@@ -72,7 +72,7 @@ namespace GameUI
             compareAttribute = null;
         }
 
-        public void SetAttribute(CharacterAttribute attribute)
+        public void SetAttribute(EquipmentItems.Attribute attribute)
         {
             m_Attribute = attribute;
             m_ImageElement.ClearClassList();
@@ -83,7 +83,7 @@ namespace GameUI
             RefreshValueChangeLabel();
         }
 
-        public void SetCompareAttribute(CharacterAttribute attribute)
+        public void SetCompareAttribute(EquipmentItems.Attribute attribute)
         {
             m_CompareAttribute = attribute;
             RefreshValueChangeLabel();
