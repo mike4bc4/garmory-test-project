@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 namespace CharacterFeatures
 {
@@ -14,53 +15,56 @@ namespace CharacterFeatures
             get => m_Name;
         }
 
+        float m_Value;
+
+        public float value
+        {
+            get => m_Value;
+            set => m_Value = value;
+        }
+
+        public bool isEmpty
+        {
+            get => m_Value == 0f;
+        }
+
         public CharacterAttribute(string name)
         {
             m_Name = name;
         }
 
-        public abstract string GetValueString();
+        public abstract string GetValueString(bool withSign = false);
 
-        public abstract bool isEmpty { get; }
+        public abstract CharacterAttribute Clone();
     }
 
-    public class CharacterAttribute<T> : CharacterAttribute
+    public class NumericCharacterAttribute : CharacterAttribute
     {
-        T m_Value;
+        public NumericCharacterAttribute(string name) : base(name) { }
 
-        public T value
+        public override string GetValueString(bool withSign = false)
         {
-            get => m_Value;
+            return withSign ? string.Format("{0:+0.#;-0.#}", value) : string.Format("{0:0.#}", value);
         }
 
-        public override bool isEmpty
+        public override CharacterAttribute Clone()
         {
-            get
-            {
-                if (value is int intValue)
-                {
-                    return intValue == 0;
-                }
-                else if (value is float floatValue)
-                {
-                    return floatValue == 0f;
-                }
+            return new NumericCharacterAttribute(name) { value = value };
+        }
+    }
 
-                return false;
-            }
+    public class PercentageCharacterAttribute : CharacterAttribute
+    {
+        public PercentageCharacterAttribute(string name) : base(name) { }
+
+        public override string GetValueString(bool withSign = false)
+        {
+            return withSign ? string.Format("{0:+0.#%;-0.#%}", value / 100f) : string.Format("{0:0.#%}", value / 100f);
         }
 
-        Func<T, string> m_ValueParseFunction;
-
-        public CharacterAttribute(string name, T value, Func<T, string> valueParseFunction) : base(name)
+        public override CharacterAttribute Clone()
         {
-            m_Value = value;
-            m_ValueParseFunction = valueParseFunction;
-        }
-
-        public override string GetValueString()
-        {
-            return m_ValueParseFunction(value);
+            return new PercentageCharacterAttribute(name) { value = value };
         }
     }
 }

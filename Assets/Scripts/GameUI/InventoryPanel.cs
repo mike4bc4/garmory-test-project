@@ -39,6 +39,19 @@ namespace GameUI
             get => m_DescriptionPanel;
         }
 
+        ItemSlotControl m_SelectedItemSlot;
+
+        public ItemSlotControl selectedItemSlot
+        {
+            get => m_SelectedItemSlot;
+            set => SetSelectedItemSlot(value);
+        }
+
+        public EquipmentPanel equipmentPanel
+        {
+            get => characterLeftPanel.characterPanel.rightPanel.equipmentPanel;
+        }
+
         public InventoryPanel(CharacterLeftPanel characterLeftPanel, VisualElement rootElement) : base(rootElement)
         {
             m_CharacterLeftPanel = characterLeftPanel;
@@ -69,9 +82,6 @@ namespace GameUI
                     m_ItemSlots[i].item = items[i];
                 }
 
-                m_ItemSlots[1].selected = true;
-                descriptionPanel.slotControl = m_ItemSlots[1];
-
                 var mainPanel = characterLeftPanel.characterPanel.mainPanel;
                 foreach (var itemSlot in m_ItemSlots)
                 {
@@ -93,26 +103,46 @@ namespace GameUI
                             {
                                 itemSlot.Click();
                             }
+
+                            // Refresh item description panel as dropped item might have been taken off from character.
+                            RefreshItemDescriptionPanel();
                         }
                     };
 
-                    itemSlot.onClicked += () =>
-                    {
-                        var previousDescriptionPanelSlotControl = descriptionPanel.slotControl;
-                        if (descriptionPanel.slotControl != null)
-                        {
-                            descriptionPanel.slotControl.selected = false;
-                            descriptionPanel.slotControl = null;
-                        }
-
-                        if (previousDescriptionPanelSlotControl != itemSlot && itemSlot.item != null)
-                        {
-                            itemSlot.selected = true;
-                            descriptionPanel.slotControl = itemSlot;
-                        }
-                    };
+                    itemSlot.onClicked += () => SetSelectedItemSlot(itemSlot);
                 }
             });
+        }
+
+        public void RefreshItemDescriptionPanel()
+        {
+            if (m_SelectedItemSlot != null)
+            {
+                descriptionPanel.item = m_SelectedItemSlot.item;
+                descriptionPanel.compareItem = equipmentPanel.GetItemSlot(m_SelectedItemSlot.item.category)?.item;
+            }
+        }
+
+        public void SetSelectedItemSlot(ItemSlotControl selectedItemSlot)
+        {
+            var previousSelectedItemSlot = m_SelectedItemSlot;
+
+            m_SelectedItemSlot = null;
+            if (previousSelectedItemSlot != null)
+            {
+                previousSelectedItemSlot.selected = false;
+            }
+
+            descriptionPanel.item = null;
+            descriptionPanel.compareItem = null;
+
+            if (previousSelectedItemSlot != selectedItemSlot && selectedItemSlot.item != null)
+            {
+                m_SelectedItemSlot = selectedItemSlot;
+                selectedItemSlot.selected = true;
+                descriptionPanel.item = selectedItemSlot.item;
+                descriptionPanel.compareItem = equipmentPanel.GetItemSlot(selectedItemSlot.item.category)?.item;
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CharacterFeatures;
 using EquipmentItems;
 using ResourcesUtility;
 using UnityEngine;
@@ -18,12 +19,20 @@ namespace GameUI
         VisualElement m_StatsContainer;
         AsyncOperationHandle<Texture2D> itemImageLoadHandle;
 
-        ItemSlotControl m_SlotControl;
+        Item m_Item;
 
-        public ItemSlotControl slotControl
+        public Item item
         {
-            get => m_SlotControl;
-            set => SetSlotControl(value);
+            get => m_Item;
+            set => SetItem(value);
+        }
+
+        Item m_CompareItem;
+
+        public Item compareItem
+        {
+            get => m_CompareItem;
+            set => SetCompareItem(value);
         }
 
         public ItemDescriptionPanel(VisualElement rootElement) : base(rootElement)
@@ -33,18 +42,49 @@ namespace GameUI
             m_ItemInfoContainer = rootElement.Q<VisualElement>("ItemInfoContainer");
             m_ImageElement = rootElement.Q<VisualElement>("ImageElement");
             m_StatsContainer = rootElement.Q<VisualElement>("StatsContainer");
-            SetSlotControl(null);
+            SetItem(null);
+            SetCompareItem(null);
         }
 
-        public void SetSlotControl(ItemSlotControl slotControl)
+        void RefreshItemAttributes()
         {
-            m_SlotControl = slotControl;
+            m_StatsContainer.Clear();
+            if (item == null)
+            {
+                return;
+            }
+
+            for (int i = 0; i < item.attributes.Count; i++)
+            {
+                CharacterAttribute attribute = item.attributes[i];
+                CharacterAttribute compareAttribute = compareItem?.attributes[i];
+                if (!attribute.isEmpty)
+                {
+                    m_StatsContainer.Add(new AttributeControl()
+                    {
+                        attribute = attribute,
+                        compareAttribute = compareAttribute,
+                        valueChangeVisible = item != compareItem,
+                    });
+                }
+            }
+        }
+
+        public void SetCompareItem(Item item)
+        {
+            m_CompareItem = item;
+            RefreshItemAttributes();
+        }
+
+        public void SetItem(Item item)
+        {
+            m_Item = item;
             m_ScrollView.scrollOffset = Vector2.zero;
-            if (m_SlotControl?.item != null)
+            if (item != null)
             {
                 SetItemInfoContainerVisible(true);
-                m_NameLabel.text = m_SlotControl.item.name;
-                itemImageLoadHandle = Addressables.LoadAssetAsync<Texture2D>(m_SlotControl.item.name);
+                m_NameLabel.text = item.name;
+                itemImageLoadHandle = Addressables.LoadAssetAsync<Texture2D>(item.name);
                 itemImageLoadHandle.Completed += op =>
                 {
                     if (op.Status == AsyncOperationStatus.Succeeded)
@@ -56,15 +96,6 @@ namespace GameUI
                         Addressables.Release(itemImageLoadHandle);
                     }
                 };
-
-                m_StatsContainer.Clear();
-                foreach (var attribute in m_SlotControl.item.attributes)
-                {
-                    if (!attribute.isEmpty)
-                    {
-                        m_StatsContainer.Add(new AttributeControl() { attribute = attribute });
-                    }
-                }
             }
             else
             {
@@ -74,9 +105,9 @@ namespace GameUI
                 {
                     Addressables.Release(itemImageLoadHandle);
                 }
-
-                m_StatsContainer.Clear();
             }
+
+            RefreshItemAttributes();
         }
 
         void SetItemInfoContainerVisible(bool visible)

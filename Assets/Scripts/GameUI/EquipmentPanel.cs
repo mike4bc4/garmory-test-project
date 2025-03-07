@@ -24,6 +24,11 @@ namespace GameUI
             get => m_CharacterRightPanel.characterPanel.mainPanel.draggablePanel;
         }
 
+        public InventoryPanel inventoryPanel
+        {
+            get => m_CharacterRightPanel.characterPanel.leftPanel.inventoryPanel;
+        }
+
         public EquipmentPanel(CharacterRightPanel characterRightPanel, VisualElement rootElement) : base(rootElement)
         {
             m_CharacterRightPanel = characterRightPanel;
@@ -65,14 +70,29 @@ namespace GameUI
                         && draggedItemSlot.item.category == itemSlot.category)
                     {
                         (itemSlot.item, draggedItemSlot.item) = (draggedItemSlot.item, itemSlot.item);
+                        if (draggedItemSlot.selected)
+                        {
+                            itemSlot.Click();
+                        }
+
+                        // Refresh item description panel as dropped item might have been taken off from character.
+                        inventoryPanel.RefreshItemDescriptionPanel();
                     }
                 };
 
-                itemSlot.onClicked += () =>
-                {
-                    // Display in inventory description panel?
-                };
+                itemSlot.onClicked += () => inventoryPanel.SetSelectedItemSlot(itemSlot);
             }
+        }
+
+        public ItemSlotControl GetItemSlot(EquipmentItems.Category category)
+        {
+            var index = (int)category;
+            if (index >= 0 && index < m_ItemSlots.Count)
+            {
+                return m_ItemSlots[index];
+            }
+
+            return null;
         }
     }
 }

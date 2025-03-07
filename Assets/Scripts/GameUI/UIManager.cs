@@ -34,6 +34,7 @@ namespace GameUI
 
         void Awake()
         {
+            Application.targetFrameRate = 60;
             s_Instance = this;
             m_UIDocument = GetComponent<UIDocument>();
             m_MainPanel = new MainPanel(this, m_UIDocument.rootVisualElement.Q<VisualElement>("MainPanel"));
