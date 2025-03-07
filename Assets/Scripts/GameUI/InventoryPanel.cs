@@ -126,13 +126,14 @@ namespace GameUI
 
         void Clear()
         {
+            selectedItemSlot = null;
             m_GridContainer.Clear();
             foreach (var itemSlot in m_ItemSlots)
             {
                 itemSlot.OnDestroy();
             }
 
-            m_ItemSlots.Clear();
+            m_ItemSlots.Clear();   
         }
 
         void RebuildInventory()
@@ -209,7 +210,7 @@ namespace GameUI
             descriptionPanel.item = null;
             descriptionPanel.compareItem = null;
 
-            if (previousSelectedItemSlot != selectedItemSlot && selectedItemSlot.item != null)
+            if (previousSelectedItemSlot != selectedItemSlot && selectedItemSlot?.item != null)
             {
                 m_SelectedItemSlot = selectedItemSlot;
                 selectedItemSlot.selected = true;

@@ -105,6 +105,10 @@ namespace GameUI
                         {
                             inventoryPanel.selectedItemSlot = itemSlot;
                         }
+                        else if (itemSlot.selected)
+                        {
+                            inventoryPanel.selectedItemSlot = draggedItemSlot;
+                        }
 
                         // Refresh item description panel as dropped item might have been taken off from character.
                         inventoryPanel.RefreshItemDescriptionPanel();
