@@ -42,16 +42,10 @@
                     <ui:VisualElement name="EquipmentPanel" style="flex-grow: 1;">
                         <ui:VisualElement name="GridContainer" style="flex-grow: 1;" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="StatsPanel" style="height: 30%;">
-                        <ui:VisualElement name="TopBar">
-                            <ui:Label text="Stats" display-tooltip-when-elided="true" name="Label" style="-unity-text-align: middle-center;" />
-                        </ui:VisualElement>
+                    <ui:VisualElement name="AttributesPanel" style="height: 30%;">
+                        <ui:Label text="Attributes" display-tooltip-when-elided="true" name="Label" style="-unity-text-align: middle-center;" />
                         <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" vertical-scroller-visibility="AlwaysVisible" name="ScrollView" style="flex-grow: 1;">
-                            <ui:VisualElement name="StatControl" style="flex-direction: row;">
-                                <ui:VisualElement name="StatIcon" style="background-color: rgb(255, 0, 255); min-width: 30px; min-height: 30px; width: 20px; height: 20px;" />
-                                <ui:Label text="Attack Speed" display-tooltip-when-elided="true" name="StatNameLabel" style="flex-grow: 1; -unity-text-align: middle-left;" />
-                                <ui:Label text="100" display-tooltip-when-elided="true" name="StatValueLabel" style="-unity-text-align: middle-left;" />
-                            </ui:VisualElement>
+                            <ui:VisualElement name="AttributesContainer" />
                         </ui:ScrollView>
                     </ui:VisualElement>
                 </ui:VisualElement>

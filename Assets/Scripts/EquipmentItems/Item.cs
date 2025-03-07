@@ -105,6 +105,26 @@ namespace EquipmentItems
             }
         }
 
+        public static List<Attribute> AvailableAttributes
+        {
+            get
+            {
+                var attributes = new List<Attribute>()
+                {
+                    new NumericAttribute("Damage"),
+                    new NumericAttribute("Health Points"),
+                    new NumericAttribute("Defense"),
+                    new PercentageAttribute("Life Steal"),
+                    new PercentageAttribute("Critical Strike Chance"),
+                    new PercentageAttribute("Attack Speed"),
+                    new PercentageAttribute("Movement Speed"),
+                    new PercentageAttribute("Luck")
+                };
+
+                return attributes;
+            }
+        }
+
         public Item(ServerResponseItemWrapper itemWrapper)
         {
             m_Name = itemWrapper.Name;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CharacterTraits;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -29,6 +30,17 @@ namespace GameUI
             get => m_CharacterRightPanel.characterPanel.leftPanel.inventoryPanel;
         }
 
+        public Equipment m_Equipment;
+
+        public Equipment equipment
+        {
+            get => m_Equipment;
+            set => SetEquipment(value);
+        }
+
+        bool m_AllowDataChanges;
+        bool m_AllowViewChanges;
+
         public EquipmentPanel(CharacterRightPanel characterRightPanel, VisualElement rootElement) : base(rootElement)
         {
             m_CharacterRightPanel = characterRightPanel;
@@ -55,6 +67,25 @@ namespace GameUI
 
             foreach (var itemSlot in m_ItemSlots)
             {
+                // Updates equipment data when view has changed.
+                itemSlot.onItemChanged += () =>
+                {
+                    if (m_AllowDataChanges)
+                    {
+                        // Disallow view changes, it's already up to date.
+                        m_AllowViewChanges = false;
+                        if (itemSlot.item != null)
+                        {
+                            equipment.Equip(itemSlot.item);
+                        }
+                        else
+                        {
+                            equipment.Unequip(itemSlot.category);
+                        }
+                        m_AllowViewChanges = true;
+                    }
+                };
+
                 itemSlot.onDragStarted += () =>
                 {
                     if (itemSlot.item != null)
@@ -72,7 +103,7 @@ namespace GameUI
                         (itemSlot.item, draggedItemSlot.item) = (draggedItemSlot.item, itemSlot.item);
                         if (draggedItemSlot.selected)
                         {
-                            itemSlot.Click();
+                            inventoryPanel.selectedItemSlot = itemSlot;
                         }
 
                         // Refresh item description panel as dropped item might have been taken off from character.
@@ -80,8 +111,56 @@ namespace GameUI
                     }
                 };
 
-                itemSlot.onClicked += () => inventoryPanel.SetSelectedItemSlot(itemSlot);
+                itemSlot.onClicked += () => inventoryPanel.selectedItemSlot = itemSlot;
             }
+
+            equipment = null;
+            m_AllowDataChanges = true;
+            m_AllowViewChanges = true;
+        }
+
+        public void SetEquipment(Equipment equipment)
+        {
+            if (m_Equipment != null)
+            {
+                m_Equipment.onChanged -= OnEquipmentChanged;
+            }
+
+            m_Equipment = equipment;
+            if (m_Equipment != null)
+            {
+                m_Equipment.onChanged += OnEquipmentChanged;
+            }
+
+            RefreshEquipment();
+        }
+
+        /// <summary>
+        /// Updates view when equipment data has changed.
+        /// </summary>
+        /// <param name="index"></param>
+        void OnEquipmentChanged(int index)
+        {
+            if (m_AllowViewChanges)
+            {
+                // Disallow data changes, equipment is already up to date.
+                m_AllowDataChanges = false;
+                var itemSlot = m_ItemSlots[index];
+                itemSlot.item = m_Equipment.items[index];
+                m_AllowDataChanges = true;
+            }
+        }
+
+        void RefreshEquipment()
+        {
+            // Disallow data changes, just want to update view.
+            m_AllowDataChanges = false;
+            for (int i = 0; i < m_ItemSlots.Count; i++)
+            {
+                ItemSlotControl itemSlot = m_ItemSlots[i];
+                itemSlot.item = equipment?.items[i];
+            }
+            m_AllowDataChanges = true;
         }
 
         public ItemSlotControl GetItemSlot(EquipmentItems.Category category)
@@ -93,6 +172,11 @@ namespace GameUI
             }
 
             return null;
+        }
+
+        public void OnItemSlotChanged(ItemSlotControl itemSlot)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

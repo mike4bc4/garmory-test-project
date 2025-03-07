@@ -109,7 +109,7 @@ namespace GameUI
             else
             {
                 var attribute = m_Attribute.Clone();
-                attribute.value = m_CompareAttribute.value - m_Attribute.value;
+                attribute.value = m_Attribute.value - m_CompareAttribute.value;
                 m_ValueChangeLabel.text = $"({attribute.GetValueString(true)})";
             }
         }

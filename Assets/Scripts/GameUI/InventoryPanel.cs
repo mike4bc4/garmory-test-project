@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using CharacterTraits;
 using EquipmentItems;
 using Gameplay;
 using InputUtilities;
@@ -15,6 +16,8 @@ namespace GameUI
 {
     public class InventoryPanel : OpenablePanel
     {
+        const int k_GridContainerRowSize = 4;
+
         CharacterLeftPanel m_CharacterLeftPanel;
 
         public CharacterLeftPanel characterLeftPanel
@@ -52,6 +55,22 @@ namespace GameUI
             get => characterLeftPanel.characterPanel.rightPanel.equipmentPanel;
         }
 
+        public DraggablePanel draggablePanel
+        {
+            get => characterLeftPanel.characterPanel.mainPanel.draggablePanel;
+        }
+
+        Inventory m_Inventory;
+
+        public Inventory inventory
+        {
+            get => m_Inventory;
+            set => SetInventory(value);
+        }
+
+        bool m_AllowDataChanges;
+        bool m_AllowViewChanges;
+
         public InventoryPanel(CharacterLeftPanel characterLeftPanel, VisualElement rootElement) : base(rootElement)
         {
             m_CharacterLeftPanel = characterLeftPanel;
@@ -64,54 +83,108 @@ namespace GameUI
             m_DescriptionPanel = new ItemDescriptionPanel(rootElement.Q<VisualElement>("DescriptionPanel"));
 
             Close();
+            inventory = null;
+            m_AllowDataChanges = true;
+            m_AllowViewChanges = true;
+        }
 
-            //----
-            m_GridContainer.SetSize(100, 4);
-
-            foreach (var cell in m_GridContainer.cells)
+        public void SetInventory(Inventory inventory)
+        {
+            Clear();
+            if (m_Inventory != null)
             {
-                var itemSlot = new ItemSlotControl();
-                cell.rootElement.Add(itemSlot);
-                m_ItemSlots.Add(itemSlot);
+                m_Inventory.onChanged -= OnInventoryChanged;
+                m_Inventory.onSizeChanged -= RebuildInventory;
             }
 
-            ItemsGenerator.Generate(items =>
+            m_Inventory = inventory;
+            if (m_Inventory != null)
             {
-                for (int i = 0; i < items.Count; i++)
+                m_Inventory.onChanged += OnInventoryChanged;
+                m_Inventory.onSizeChanged += RebuildInventory;
+                RebuildInventory();
+            }
+        }
+
+        /// <summary>
+        /// Updates view when inventory data has changed.
+        /// </summary>
+        void OnInventoryChanged(List<int> changedIndexes)
+        {
+            if (m_AllowViewChanges)
+            {
+                foreach (var index in changedIndexes)
                 {
-                    m_ItemSlots[i].item = items[i];
+                    // Disallow data changes, inventory is already up to date.
+                    m_AllowDataChanges = false;
+                    var itemSlot = m_ItemSlots[index];
+                    itemSlot.item = m_Inventory.items[index];
+                    m_AllowDataChanges = true;
                 }
+            }
+        }
 
-                var mainPanel = characterLeftPanel.characterPanel.mainPanel;
-                foreach (var itemSlot in m_ItemSlots)
+        void Clear()
+        {
+            m_GridContainer.Clear();
+            foreach (var itemSlot in m_ItemSlots)
+            {
+                itemSlot.OnDestroy();
+            }
+
+            m_ItemSlots.Clear();
+        }
+
+        void RebuildInventory()
+        {
+            Clear();
+            m_GridContainer.SetSize(m_Inventory.size, k_GridContainerRowSize);
+            for (int i = 0; i < m_GridContainer.cells.Count; i++)
+            {
+                var itemSlotIndex = i;
+                var itemSlot = new ItemSlotControl();
+                m_GridContainer[i].rootElement.Add(itemSlot);
+                m_ItemSlots.Add(itemSlot);
+                itemSlot.item = inventory.items[i];
+
+                // Updates inventory data when view has changed.
+                itemSlot.onItemChanged += () =>
                 {
-                    itemSlot.onDragStarted += () =>
+                    if (m_AllowDataChanges)
                     {
-                        if (itemSlot.item != null)
-                        {
-                            mainPanel.draggablePanel.draggableControl = itemSlot;
-                        }
-                    };
+                        // Disallow view changes, UI is already up to date.
+                        m_AllowViewChanges = false;
+                        m_Inventory.PutItem(itemSlotIndex, itemSlot.item);
+                        m_AllowViewChanges = true;
+                    }
+                };
 
-                    itemSlot.onReleased += () =>
+                itemSlot.onDragStarted += () =>
+                {
+                    if (itemSlot.item != null)
                     {
-                        if (mainPanel.draggablePanel.dragStoppedTimestamp == Time.time
-                            && mainPanel.draggablePanel.previousDraggableControl is ItemSlotControl draggedItemSlot)
+                        draggablePanel.draggableControl = itemSlot;
+                    }
+                };
+
+                itemSlot.onReleased += () =>
+                {
+                    if (draggablePanel.dragStoppedTimestamp == Time.time
+                        && draggablePanel.previousDraggableControl is ItemSlotControl draggedItemSlot)
+                    {
+                        (itemSlot.item, draggedItemSlot.item) = (draggedItemSlot.item, itemSlot.item);
+                        if (draggedItemSlot.selected)
                         {
-                            (itemSlot.item, draggedItemSlot.item) = (draggedItemSlot.item, itemSlot.item);
-                            if (draggedItemSlot.selected)
-                            {
-                                itemSlot.Click();
-                            }
-
-                            // Refresh item description panel as dropped item might have been taken off from character.
-                            RefreshItemDescriptionPanel();
+                            selectedItemSlot = itemSlot;
                         }
-                    };
 
-                    itemSlot.onClicked += () => SetSelectedItemSlot(itemSlot);
-                }
-            });
+                        // Refresh item description panel as dropped item might have been taken off from character.
+                        RefreshItemDescriptionPanel();
+                    }
+                };
+
+                itemSlot.onClicked += () => selectedItemSlot = itemSlot;
+            }
         }
 
         public void RefreshItemDescriptionPanel()

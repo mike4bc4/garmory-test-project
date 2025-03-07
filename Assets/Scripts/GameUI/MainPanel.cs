@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CharacterTraits;
 using GameUI.CustomControls;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -50,10 +51,12 @@ namespace GameUI
         {
             if (characterPanel.isOpen)
             {
+                characterPanel.character = null;
                 characterPanel.Close();
             }
             else
             {
+                characterPanel.character = CharacterManager.MainCharacter;
                 characterPanel.Open();
             }
         }

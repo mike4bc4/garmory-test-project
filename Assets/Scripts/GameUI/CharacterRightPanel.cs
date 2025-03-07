@@ -24,6 +24,13 @@ namespace GameUI
             get => m_EquipmentPanel;
         }
 
+        AttributesPanel m_AttributesPanel;
+
+        public AttributesPanel attributesPanel
+        {
+            get => m_AttributesPanel;
+        }
+
         public CharacterRightPanel(CharacterPanel characterPanel, VisualElement rootElement) : base(rootElement)
         {
             m_CharacterPanel = characterPanel;
@@ -31,6 +38,7 @@ namespace GameUI
             m_TopBar.onCloseButtonClicked += m_CharacterPanel.Close;
 
             m_EquipmentPanel = new EquipmentPanel(this, rootElement.Q<VisualElement>("EquipmentPanel"));
+            m_AttributesPanel = new AttributesPanel(this, rootElement.Q("AttributesPanel"));
         }
     }
 }

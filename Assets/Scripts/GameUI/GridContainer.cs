@@ -42,11 +42,15 @@ namespace GameUI
             m_Rows = new List<GridContainerRow>();
         }
 
-        public void SetSize(int size, int rowSize)
+        public void Clear()
         {
             rootElement.Clear();
             m_Rows.Clear();
+        }
 
+        public void SetSize(int size, int rowSize)
+        {
+            Clear();
             int fullRowsCount = size / rowSize;
             for (int i = 0; i < fullRowsCount; i++)
             {

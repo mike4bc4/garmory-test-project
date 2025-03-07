@@ -19,6 +19,7 @@ namespace GameUI
         const string k_SelectedClassName = k_ClassName + "__selected";
         const float k_DragRadius = 10f;
 
+        public event Action onItemChanged;
         public event Action onReleased;
         public event Action onClicked;
         public event Action onDragStarted;
@@ -64,6 +65,14 @@ namespace GameUI
             set => SetEventsEnabled(value);
         }
 
+        bool m_SuppressItemChangedEvent;
+
+        public bool suppressItemChangedEvent
+        {
+            get => m_SuppressItemChangedEvent;
+            set => m_SuppressItemChangedEvent = value;
+        }
+
         public ItemSlotControl()
         {
             rootElement.AddToClassList(k_ClassName);
@@ -89,11 +98,7 @@ namespace GameUI
             item = null;
             eventsEnabled = true;
             selected = false;
-        }
-
-        public void Click()
-        {
-            onClicked?.Invoke();
+            suppressItemChangedEvent = false;
         }
 
         void SetEventsEnabled(bool enabled)
@@ -195,11 +200,25 @@ namespace GameUI
                     Addressables.Release(m_ItemImageLoadHandle);
                 }
             }
+
+            if (!m_SuppressItemChangedEvent)
+            {
+                onItemChanged?.Invoke();
+            }
+        }
+
+        public void OnDestroy()
+        {
+            m_ItemImageElement.style.backgroundImage = null;
+            if (m_ItemImageLoadHandle.IsValid())
+            {
+                Addressables.Release(m_ItemImageLoadHandle);
+            }
         }
 
         public VisualElement CreateDraggable()
         {
-            var duplicate = new ItemSlotControl
+            var duplicate = new ItemSlotControl()
             {
                 item = item,
                 selected = false,

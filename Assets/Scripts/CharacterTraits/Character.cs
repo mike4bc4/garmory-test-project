@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using EquipmentItems;
+using Gameplay;
 using UnityEngine;
 
 namespace CharacterTraits
@@ -25,6 +26,12 @@ namespace CharacterTraits
         {
             m_Inventory = new Inventory(this);
             m_Equipment = new Equipment(this);
+
+            ItemsGenerator.Generate(items =>
+            {
+                Debug.Log("Items generated");
+                inventory.AddItems(items);
+            });
         }
     }
 }
