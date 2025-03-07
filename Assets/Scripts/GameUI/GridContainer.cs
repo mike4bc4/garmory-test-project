@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,19 @@ namespace GameUI
                 }
 
                 return cells;
+            }
+        }
+
+        public GridContainerCell this[int index]
+        {
+            get
+            {
+                if (index < 0 || cells.Count <= index)
+                {
+                    throw new IndexOutOfRangeException();
+                }
+
+                return cells[index];
             }
         }
 
@@ -47,6 +61,19 @@ namespace GameUI
                 var row = new GridContainerRow(lastRowSize);
                 m_Rows.Add(row);
                 rootElement.Add(row);
+            }
+        }
+
+        public void SetCellsVisible(bool visible, params int[] indexes)
+        {
+            var cells = this.cells;
+            var visibility = visible ? Visibility.Visible : Visibility.Hidden;
+            foreach (var index in indexes)
+            {
+                if (index >= 0 && cells.Count > index)
+                {
+                    cells[index].rootElement.style.visibility = visibility;
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace GameUI
@@ -25,6 +26,11 @@ namespace GameUI
                 var cell = new GridContainerCell();
                 m_Cells.Add(cell);
                 rootElement.Add(cell);
+            }
+
+            if (m_Cells.Count > 0)
+            {
+                m_Cells.Last().isLast = true;
             }
         }
     }

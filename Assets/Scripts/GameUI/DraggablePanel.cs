@@ -87,21 +87,21 @@ namespace GameUI
             if (m_DraggableControl != null)
             {
                 m_Draggable = draggableControl.CreateDraggable();
-                SetDraggablePickingMode(PickingMode.Ignore);
+                // SetDraggablePickingMode(PickingMode.Ignore);
                 m_Draggable.AddToClassList(k_DraggableClassName);
                 rootElement.Add(m_Draggable);
                 Scheduler.OnUpdate += MoveDraggable;
             }
         }
 
-        void SetDraggablePickingMode(PickingMode pickingMode)
-        {
-            var elements = m_Draggable.Query<VisualElement>().ToList();
-            foreach (var element in elements)
-            {
-                element.pickingMode = pickingMode;
-            }
-        }
+        // void SetDraggablePickingMode(PickingMode pickingMode)
+        // {
+        //     var elements = m_Draggable.Query<VisualElement>().ToList();
+        //     foreach (var element in elements)
+        //     {
+        //         element.pickingMode = pickingMode;
+        //     }
+        // }
 
         void MoveDraggable()
         {

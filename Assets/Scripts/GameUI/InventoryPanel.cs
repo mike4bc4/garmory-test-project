@@ -30,7 +30,7 @@ namespace GameUI
         }
 
         GridContainer m_GridContainer;
-        List<InventorySlotControl> m_SlotControls;
+        List<ItemSlotControl> m_ItemSlots;
 
         ItemDescriptionPanel m_DescriptionPanel;
 
@@ -46,7 +46,7 @@ namespace GameUI
             m_TopBar.onCloseButtonClicked += Close;
 
             m_GridContainer = new GridContainer(rootElement.Q<VisualElement>("GridContainer"));
-            m_SlotControls = new List<InventorySlotControl>();
+            m_ItemSlots = new List<ItemSlotControl>();
 
             m_DescriptionPanel = new ItemDescriptionPanel(rootElement.Q<VisualElement>("DescriptionPanel"));
 
@@ -57,43 +57,46 @@ namespace GameUI
 
             foreach (var cell in m_GridContainer.cells)
             {
-                var itemControl = new InventorySlotControl();
-                cell.rootElement.Add(itemControl);
-                m_SlotControls.Add(itemControl);
+                var itemSlot = new ItemSlotControl();
+                cell.rootElement.Add(itemSlot);
+                m_ItemSlots.Add(itemSlot);
             }
 
             ItemsGenerator.Generate(items =>
             {
                 for (int i = 0; i < items.Count; i++)
                 {
-                    m_SlotControls[i].item = items[i];
+                    m_ItemSlots[i].item = items[i];
                 }
 
-                m_SlotControls[1].selected = true;
-                descriptionPanel.slotControl = m_SlotControls[1];
+                m_ItemSlots[1].selected = true;
+                descriptionPanel.slotControl = m_ItemSlots[1];
 
                 var mainPanel = characterLeftPanel.characterPanel.mainPanel;
-                foreach (var slotControl in m_SlotControls)
+                foreach (var itemSlot in m_ItemSlots)
                 {
-                    slotControl.onDragStarted += () =>
+                    itemSlot.onDragStarted += () =>
                     {
-                        if (slotControl.item != null)
+                        if (itemSlot.item != null)
                         {
-                            mainPanel.draggablePanel.draggableControl = slotControl;
-                            Debug.Log("Picked " + slotControl.item.name);
+                            mainPanel.draggablePanel.draggableControl = itemSlot;
                         }
                     };
 
-                    slotControl.onReleased += () =>
+                    itemSlot.onReleased += () =>
                     {
                         if (mainPanel.draggablePanel.dragStoppedTimestamp == Time.time
-                            && mainPanel.draggablePanel.previousDraggableControl is InventorySlotControl droppedSlotControl)
+                            && mainPanel.draggablePanel.previousDraggableControl is ItemSlotControl draggedItemSlot)
                         {
-                            Debug.Log("Dropped " + droppedSlotControl.item.name + " on " + (slotControl.item != null ? slotControl.item.name : "empty slot"));
+                            (itemSlot.item, draggedItemSlot.item) = (draggedItemSlot.item, itemSlot.item);
+                            if (draggedItemSlot.selected)
+                            {
+                                itemSlot.Click();
+                            }
                         }
                     };
 
-                    slotControl.onClicked += () =>
+                    itemSlot.onClicked += () =>
                     {
                         var previousDescriptionPanelSlotControl = descriptionPanel.slotControl;
                         if (descriptionPanel.slotControl != null)
@@ -102,10 +105,10 @@ namespace GameUI
                             descriptionPanel.slotControl = null;
                         }
 
-                        if (previousDescriptionPanelSlotControl != slotControl && slotControl.item != null)
+                        if (previousDescriptionPanelSlotControl != itemSlot && itemSlot.item != null)
                         {
-                            slotControl.selected = true;
-                            descriptionPanel.slotControl = slotControl;
+                            itemSlot.selected = true;
+                            descriptionPanel.slotControl = itemSlot;
                         }
                     };
                 }

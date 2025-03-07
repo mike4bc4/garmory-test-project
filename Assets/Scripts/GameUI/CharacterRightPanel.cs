@@ -17,11 +17,20 @@ namespace GameUI
 
         TopBar m_TopBar;
 
+        EquipmentPanel m_EquipmentPanel;
+
+        public EquipmentPanel equipmentPanel
+        {
+            get => m_EquipmentPanel;
+        }
+
         public CharacterRightPanel(CharacterPanel characterPanel, VisualElement rootElement) : base(rootElement)
         {
             m_CharacterPanel = characterPanel;
             m_TopBar = new TopBar(rootElement.Q<VisualElement>("TopBar"));
             m_TopBar.onCloseButtonClicked += m_CharacterPanel.Close;
+
+            m_EquipmentPanel = new EquipmentPanel(this, rootElement.Q<VisualElement>("EquipmentPanel"));
         }
     }
 }

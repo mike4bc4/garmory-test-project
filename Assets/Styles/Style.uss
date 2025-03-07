@@ -1,18 +1,24 @@
 VisualElement {
 }
 
+.grid-container {
+}
+
 .grid-container__row {
     flex-direction: row;
-    padding-left: 10px;
-    justify-content: flex-start;
-    margin-bottom: 10px;
+    justify-content: center;
+    margin-bottom: 8px;
 }
 
 .grid-container__row__cell {
     min-width: 80px;
     min-height: 80px;
     background-color: rgb(255, 0, 255);
-    margin-right: 10px;
+    margin-right: 8px;
+}
+
+.grid-container__row__cell--last {
+    margin-right: 0;
 }
 
 .inventory-item-box {
@@ -100,7 +106,7 @@ VisualElement {
     height: 40px;
     min-width: 40px;
     min-height: 40px;
-    background-color: rgba(255, 0, 255, 255);
+    background-color: rgb(255, 0, 255);
 }
 
 .attribute-control__label {
@@ -142,4 +148,95 @@ VisualElement {
 
 .attribute-control__image--luck {
     background-image: url("project://database/Assets/Textures/Buffs/BuffShock.png?fileID=2800000&guid=2852739d4f30a854896ea5c968e1c010&type=3#BuffShock");
+}
+
+.item-slot {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.item-slot__background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(128, 128, 128);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.25);
+}
+
+.item-slot__background--helmet {
+    background-image: url("project://database/Assets/Textures/Items/Helmet/GuardHelmet.png?fileID=2800000&guid=7b34c31450dd51748b586e04e6e8feb5&type=3#GuardHelmet");
+}
+
+.item-slot__background--necklace {
+    background-image: url("project://database/Assets/Textures/Items/Necklace/GuardNecklace.png?fileID=2800000&guid=f862cbfc395c35245abfdd07431d4b4b&type=3#GuardNecklace");
+}
+
+.item-slot__background--weapon {
+    background-image: url("project://database/Assets/Textures/Items/Weapon/GuardWeapon.png?fileID=2800000&guid=1e5f1cd825117aa44b2592716bcc1926&type=3#GuardWeapon");
+}
+
+.item-slot__background--armor {
+    background-image: url("project://database/Assets/Textures/Items/Armor/GuardArmor.png?fileID=2800000&guid=e3ad800b22a49064b9b223e758f96510&type=3#GuardArmor");
+}
+
+.item-slot__background--boots {
+    background-image: url("project://database/Assets/Textures/Items/Boots/GuardBoots.png?fileID=2800000&guid=1976716720475cf4ca80340323d4a92a&type=3#GuardBoots");
+}
+
+.item-slot__background--ring {
+    background-image: url("project://database/Assets/Textures/Items/Ring/GuardRing.png?fileID=2800000&guid=3aa026e0f9aa94b429e383e1ee73663e&type=3#GuardRing");
+}
+
+.item-slot__background--category-hidden {
+    background-image: none;
+}
+
+.item-slot__rarity {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.item-slot__rarity--common {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityCommon.png?fileID=2800000&guid=5be4320d448dd9040a0c9abd3f40f100&type=3#ItemRarityCommon");
+}
+
+.item-slot__rarity--uncommon {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityUncommon.png?fileID=2800000&guid=6ea0dbadcf0b28f489fb0a777ef529f4&type=3#ItemRarityUncommon");
+}
+
+.item-slot__rarity--rare {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityRare.png?fileID=2800000&guid=35e96054fbe19d4468494a8ab806345f&type=3#ItemRarityRare");
+}
+
+.item-slot__rarity--epic {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityEpic.png?fileID=2800000&guid=72afd0e677f3d364ba6d5dce08a7b2a1&type=3#ItemRarityEpic");
+}
+
+.item-slot__rarity--legendary {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityLegendary.png?fileID=2800000&guid=5d4d6e1bf40b87c4db405ecb536a1222&type=3#ItemRarityLegendary");
+}
+
+.item-slot__item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.item-slot__selected {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 255, 0, 0.5);
 }

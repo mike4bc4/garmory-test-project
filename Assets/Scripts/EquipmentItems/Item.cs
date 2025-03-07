@@ -16,9 +16,9 @@ namespace EquipmentItems
             get => m_Name;
         }
 
-        string m_Category;
+        Category m_Category;
 
-        public string category
+        public Category category
         {
             get => m_Category;
         }
@@ -109,7 +109,14 @@ namespace EquipmentItems
         public Item(ServerResponseItemWrapper itemWrapper)
         {
             m_Name = itemWrapper.Name;
-            m_Category = itemWrapper.Category;
+            if (Enum.TryParse<Category>(itemWrapper.Category, true, out var category))
+            {
+                m_Category = category;
+            }
+            else{
+                m_Category = Category.None;
+            }
+
             m_Rarity = (Rarity)itemWrapper.Rarity;
             m_Damage = new CharacterAttribute<int>("Damage", itemWrapper.Damage, v => v.ToString());
             m_HealthPoints = new CharacterAttribute<int>("Health Points", itemWrapper.HealthPoints, v => v.ToString());

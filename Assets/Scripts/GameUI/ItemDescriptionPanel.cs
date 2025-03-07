@@ -18,9 +18,9 @@ namespace GameUI
         VisualElement m_StatsContainer;
         AsyncOperationHandle<Texture2D> itemImageLoadHandle;
 
-        InventorySlotControl m_SlotControl;
+        ItemSlotControl m_SlotControl;
 
-        public InventorySlotControl slotControl
+        public ItemSlotControl slotControl
         {
             get => m_SlotControl;
             set => SetSlotControl(value);
@@ -36,7 +36,7 @@ namespace GameUI
             SetSlotControl(null);
         }
 
-        public void SetSlotControl(InventorySlotControl slotControl)
+        public void SetSlotControl(ItemSlotControl slotControl)
         {
             m_SlotControl = slotControl;
             m_ScrollView.scrollOffset = Vector2.zero;
