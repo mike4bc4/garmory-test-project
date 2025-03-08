@@ -83,6 +83,11 @@ namespace GameUI
                 m_Draggable.AddToClassList(k_DraggableClassName);
                 rootElement.Add(m_Draggable);
                 Scheduler.OnUpdate += MoveDraggable;
+
+                // Delay showing draggable by one frame to sync with move callback and 
+                // avoid popping up at (0, 0) coordinates.
+                m_Draggable.style.visibility = Visibility.Hidden;
+                Scheduler.NextFrame(() => m_Draggable.style.visibility = Visibility.Visible);
             }
         }
 

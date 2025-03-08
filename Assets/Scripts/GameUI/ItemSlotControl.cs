@@ -109,19 +109,20 @@ namespace GameUI
                 rootElement.RegisterCallback<MouseUpEvent>(OnMouseUp);
                 rootElement.RegisterCallback<MouseDownEvent>(OnMouseDown);
                 rootElement.RegisterCallback<MouseEnterEvent>(OnMouseEnter);
-                rootElement.RegisterCallback<MouseLeaveEvent>(OnMouseMove);
+                rootElement.RegisterCallback<MouseMoveEvent>(OnMouseMove);
             }
             else
             {
                 rootElement.UnregisterCallback<MouseUpEvent>(OnMouseUp);
                 rootElement.UnregisterCallback<MouseDownEvent>(OnMouseDown);
                 rootElement.UnregisterCallback<MouseEnterEvent>(OnMouseEnter);
-                rootElement.UnregisterCallback<MouseLeaveEvent>(OnMouseMove);
+                rootElement.UnregisterCallback<MouseMoveEvent>(OnMouseMove);
             }
         }
 
         void OnMouseUp(MouseUpEvent evt)
         {
+            m_Dragged = false;
             if (m_Pressed == true)
             {
                 m_Pressed = false;
@@ -142,7 +143,7 @@ namespace GameUI
             m_Dragged = false;
         }
 
-        void OnMouseMove(MouseLeaveEvent evt)
+        void OnMouseMove(MouseMoveEvent evt)
         {
             if (!m_Dragged && m_Pressed && Vector2.Distance(m_PressedPosition, evt.mousePosition) > k_DragRadius)
             {

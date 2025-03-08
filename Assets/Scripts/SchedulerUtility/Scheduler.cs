@@ -60,5 +60,17 @@ namespace SchedulerUtility
 
             return new ScheduledItem() { action = action };
         }
+
+        public static IScheduledItem NextFrame(Action callback)
+        {
+            Action action = null;
+            OnUpdate += action = () =>
+            {
+                callback?.Invoke();
+                OnUpdate -= action;
+            };
+
+            return new ScheduledItem() { action = action };
+        }
     }
 }
