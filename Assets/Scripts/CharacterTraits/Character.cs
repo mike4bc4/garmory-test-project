@@ -8,6 +8,34 @@ namespace CharacterTraits
 {
     public class Character : MonoBehaviour
     {
+        [SerializeField] float m_Speed;
+
+        public float speed
+        {
+            get => m_Speed;
+        }
+
+        [SerializeField] float m_JumpHeight;
+
+        public float jumpHeight
+        {
+            get => m_JumpHeight;
+        }
+
+        [SerializeField] float m_Gravity;
+
+        public float gravity
+        {
+            get => m_Gravity;
+        }
+
+        [SerializeField] float m_RotationSpeed;
+
+        public float rotationSpeed
+        {
+            get => m_RotationSpeed;
+        }
+
         Inventory m_Inventory;
 
         public Inventory inventory
@@ -22,6 +50,13 @@ namespace CharacterTraits
             get => m_Equipment;
         }
 
+        MovementSystem m_MovementSystem;
+
+        public MovementSystem movementSystem
+        {
+            get => m_MovementSystem;
+        }
+
         void Awake()
         {
             m_Inventory = new Inventory(this);
@@ -32,6 +67,13 @@ namespace CharacterTraits
                 Debug.Log("Items generated");
                 inventory.AddItems(items);
             });
+
+            m_MovementSystem = new MovementSystem(this);
+        }
+
+        void Update()
+        {
+            m_MovementSystem.Update();
         }
     }
 }

@@ -1,11 +1,9 @@
 {
-    "name": "CharacterTraits",
+    "name": "CameraUtility",
     "rootNamespace": "",
     "references": [
-        "GUID:a2fe74c5576f79d40ad3ee73363acb01",
         "GUID:9b127d19b548c3d45b8007ad6f68af09",
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:a541ee5243865ad49958407f53433c59"
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

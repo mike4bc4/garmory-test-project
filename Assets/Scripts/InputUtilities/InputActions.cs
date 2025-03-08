@@ -72,6 +72,158 @@ namespace InputUtilities
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""gameplay"",
+            ""id"": ""7a0c649b-a4f7-4bfa-8b33-68b73732bd54"",
+            ""actions"": [
+                {
+                    ""name"": ""move"",
+                    ""type"": ""Value"",
+                    ""id"": ""ba03d835-3798-4b4a-a007-6e94ac2eb7d6"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""8f3f05c7-a720-4826-9680-0502179cb95c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""cameraGrab"",
+                    ""type"": ""Button"",
+                    ""id"": ""db47b7e7-e149-4e1b-95eb-66e50a92661e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""cameraRotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""579680b4-5e64-428d-bf11-b478c37123aa"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""cameraLock"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c83cf63-7463-48c0-abef-7b832a1fec3b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""7347e6f9-0039-454f-8a5e-da3cf9b6587c"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""e11eb993-a7b8-4fbf-8e7c-241be29ff1ba"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""1179bc85-d879-440e-b4b8-5d9fb521889e"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""855240cd-007f-40c7-a07c-96a5ab6edc5f"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""241f959c-3dc2-419b-a718-809f3a1976f1"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc7d5937-2775-4ce6-bc4a-9aba05dc22a3"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d017e7f-3d0f-421d-b4e2-7c6fce354299"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""cameraGrab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a0a85b2f-2a8d-43c2-a3c4-3b3bf373c218"",
+                    ""path"": ""<Pointer>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""cameraRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c4e7557-6309-4b43-aa7a-eeb18e742b38"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""cameraLock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -80,6 +232,13 @@ namespace InputUtilities
             m_userInterface = asset.FindActionMap("userInterface", throwIfNotFound: true);
             m_userInterface_pointerMove = m_userInterface.FindAction("pointerMove", throwIfNotFound: true);
             m_userInterface_pointerPress = m_userInterface.FindAction("pointerPress", throwIfNotFound: true);
+            // gameplay
+            m_gameplay = asset.FindActionMap("gameplay", throwIfNotFound: true);
+            m_gameplay_move = m_gameplay.FindAction("move", throwIfNotFound: true);
+            m_gameplay_jump = m_gameplay.FindAction("jump", throwIfNotFound: true);
+            m_gameplay_cameraGrab = m_gameplay.FindAction("cameraGrab", throwIfNotFound: true);
+            m_gameplay_cameraRotate = m_gameplay.FindAction("cameraRotate", throwIfNotFound: true);
+            m_gameplay_cameraLock = m_gameplay.FindAction("cameraLock", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -191,10 +350,96 @@ namespace InputUtilities
             }
         }
         public UserInterfaceActions @userInterface => new UserInterfaceActions(this);
+
+        // gameplay
+        private readonly InputActionMap m_gameplay;
+        private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
+        private readonly InputAction m_gameplay_move;
+        private readonly InputAction m_gameplay_jump;
+        private readonly InputAction m_gameplay_cameraGrab;
+        private readonly InputAction m_gameplay_cameraRotate;
+        private readonly InputAction m_gameplay_cameraLock;
+        public struct GameplayActions
+        {
+            private @InputActions m_Wrapper;
+            public GameplayActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @move => m_Wrapper.m_gameplay_move;
+            public InputAction @jump => m_Wrapper.m_gameplay_jump;
+            public InputAction @cameraGrab => m_Wrapper.m_gameplay_cameraGrab;
+            public InputAction @cameraRotate => m_Wrapper.m_gameplay_cameraRotate;
+            public InputAction @cameraLock => m_Wrapper.m_gameplay_cameraLock;
+            public InputActionMap Get() { return m_Wrapper.m_gameplay; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(GameplayActions set) { return set.Get(); }
+            public void AddCallbacks(IGameplayActions instance)
+            {
+                if (instance == null || m_Wrapper.m_GameplayActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_GameplayActionsCallbackInterfaces.Add(instance);
+                @move.started += instance.OnMove;
+                @move.performed += instance.OnMove;
+                @move.canceled += instance.OnMove;
+                @jump.started += instance.OnJump;
+                @jump.performed += instance.OnJump;
+                @jump.canceled += instance.OnJump;
+                @cameraGrab.started += instance.OnCameraGrab;
+                @cameraGrab.performed += instance.OnCameraGrab;
+                @cameraGrab.canceled += instance.OnCameraGrab;
+                @cameraRotate.started += instance.OnCameraRotate;
+                @cameraRotate.performed += instance.OnCameraRotate;
+                @cameraRotate.canceled += instance.OnCameraRotate;
+                @cameraLock.started += instance.OnCameraLock;
+                @cameraLock.performed += instance.OnCameraLock;
+                @cameraLock.canceled += instance.OnCameraLock;
+            }
+
+            private void UnregisterCallbacks(IGameplayActions instance)
+            {
+                @move.started -= instance.OnMove;
+                @move.performed -= instance.OnMove;
+                @move.canceled -= instance.OnMove;
+                @jump.started -= instance.OnJump;
+                @jump.performed -= instance.OnJump;
+                @jump.canceled -= instance.OnJump;
+                @cameraGrab.started -= instance.OnCameraGrab;
+                @cameraGrab.performed -= instance.OnCameraGrab;
+                @cameraGrab.canceled -= instance.OnCameraGrab;
+                @cameraRotate.started -= instance.OnCameraRotate;
+                @cameraRotate.performed -= instance.OnCameraRotate;
+                @cameraRotate.canceled -= instance.OnCameraRotate;
+                @cameraLock.started -= instance.OnCameraLock;
+                @cameraLock.performed -= instance.OnCameraLock;
+                @cameraLock.canceled -= instance.OnCameraLock;
+            }
+
+            public void RemoveCallbacks(IGameplayActions instance)
+            {
+                if (m_Wrapper.m_GameplayActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IGameplayActions instance)
+            {
+                foreach (var item in m_Wrapper.m_GameplayActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_GameplayActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public GameplayActions @gameplay => new GameplayActions(this);
         public interface IUserInterfaceActions
         {
             void OnPointerMove(InputAction.CallbackContext context);
             void OnPointerPress(InputAction.CallbackContext context);
+        }
+        public interface IGameplayActions
+        {
+            void OnMove(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
+            void OnCameraGrab(InputAction.CallbackContext context);
+            void OnCameraRotate(InputAction.CallbackContext context);
+            void OnCameraLock(InputAction.CallbackContext context);
         }
     }
 }
