@@ -121,6 +121,15 @@ namespace InputUtilities
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""82d688de-b724-41a8-b1e2-525d3e335d30"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -222,6 +231,17 @@ namespace InputUtilities
                     ""action"": ""cameraLock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62ada9a3-53f3-423b-baa4-8e1902a02fee"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -239,6 +259,7 @@ namespace InputUtilities
             m_gameplay_cameraGrab = m_gameplay.FindAction("cameraGrab", throwIfNotFound: true);
             m_gameplay_cameraRotate = m_gameplay.FindAction("cameraRotate", throwIfNotFound: true);
             m_gameplay_cameraLock = m_gameplay.FindAction("cameraLock", throwIfNotFound: true);
+            m_gameplay_interact = m_gameplay.FindAction("interact", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -359,6 +380,7 @@ namespace InputUtilities
         private readonly InputAction m_gameplay_cameraGrab;
         private readonly InputAction m_gameplay_cameraRotate;
         private readonly InputAction m_gameplay_cameraLock;
+        private readonly InputAction m_gameplay_interact;
         public struct GameplayActions
         {
             private @InputActions m_Wrapper;
@@ -368,6 +390,7 @@ namespace InputUtilities
             public InputAction @cameraGrab => m_Wrapper.m_gameplay_cameraGrab;
             public InputAction @cameraRotate => m_Wrapper.m_gameplay_cameraRotate;
             public InputAction @cameraLock => m_Wrapper.m_gameplay_cameraLock;
+            public InputAction @interact => m_Wrapper.m_gameplay_interact;
             public InputActionMap Get() { return m_Wrapper.m_gameplay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -392,6 +415,9 @@ namespace InputUtilities
                 @cameraLock.started += instance.OnCameraLock;
                 @cameraLock.performed += instance.OnCameraLock;
                 @cameraLock.canceled += instance.OnCameraLock;
+                @interact.started += instance.OnInteract;
+                @interact.performed += instance.OnInteract;
+                @interact.canceled += instance.OnInteract;
             }
 
             private void UnregisterCallbacks(IGameplayActions instance)
@@ -411,6 +437,9 @@ namespace InputUtilities
                 @cameraLock.started -= instance.OnCameraLock;
                 @cameraLock.performed -= instance.OnCameraLock;
                 @cameraLock.canceled -= instance.OnCameraLock;
+                @interact.started -= instance.OnInteract;
+                @interact.performed -= instance.OnInteract;
+                @interact.canceled -= instance.OnInteract;
             }
 
             public void RemoveCallbacks(IGameplayActions instance)
@@ -440,6 +469,7 @@ namespace InputUtilities
             void OnCameraGrab(InputAction.CallbackContext context);
             void OnCameraRotate(InputAction.CallbackContext context);
             void OnCameraLock(InputAction.CallbackContext context);
+            void OnInteract(InputAction.CallbackContext context);
         }
     }
 }

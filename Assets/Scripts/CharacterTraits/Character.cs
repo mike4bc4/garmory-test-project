@@ -36,6 +36,8 @@ namespace CharacterTraits
             get => m_RotationSpeed;
         }
 
+        [SerializeField] InteractableTracker.Settings m_InteractableTrackerSettings;
+
         Inventory m_Inventory;
 
         public Inventory inventory
@@ -57,18 +59,26 @@ namespace CharacterTraits
             get => m_MovementSystem;
         }
 
+        InteractableTracker m_InteractableTracker;
+
+        public InteractableTracker interactableTracker
+        {
+            get => m_InteractableTracker;
+        }
+
         void Awake()
         {
             m_Inventory = new Inventory(this);
             m_Equipment = new Equipment(this);
 
-            ItemsGenerator.Generate(items =>
-            {
-                Debug.Log("Items generated");
-                inventory.AddItems(items);
-            });
+            // ItemsGenerator.Generate(items =>
+            // {
+            //     Debug.Log("Items generated");
+            //     inventory.AddItems(items);
+            // });
 
             m_MovementSystem = new MovementSystem(this);
+            m_InteractableTracker = new InteractableTracker(this, m_InteractableTrackerSettings);
         }
 
         void Update()

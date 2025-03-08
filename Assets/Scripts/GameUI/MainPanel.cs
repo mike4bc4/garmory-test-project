@@ -35,6 +35,13 @@ namespace GameUI
             get => m_DraggablePanel;
         }
 
+        PinPanel m_PinPanel;
+
+        public PinPanel pinPanel
+        {
+            get => m_PinPanel;
+        }
+
         public MainPanel(UIManager uiManager, VisualElement rootElement) : base(rootElement)
         {
             m_UIManager = uiManager;
@@ -45,6 +52,7 @@ namespace GameUI
             m_CharacterButton.clicked += OnCharacterButtonClicked;
 
             m_DraggablePanel = new DraggablePanel(this, rootElement.Q("DraggablePanel"));
+            m_PinPanel = new PinPanel(this, rootElement.Q("PinPanel"));
         }
 
         void OnCharacterButtonClicked()
