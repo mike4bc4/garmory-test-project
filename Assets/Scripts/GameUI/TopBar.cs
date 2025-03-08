@@ -11,7 +11,7 @@ namespace GameUI
     {
         public event Action onCloseButtonClicked;
         Label m_Label;
-        CustomButton m_CloseButton;
+        Button m_CloseButton;
 
         public string label
         {
@@ -22,11 +22,11 @@ namespace GameUI
         public TopBar(VisualElement rootElement) : base(rootElement)
         {
             m_Label = rootElement.Q<Label>("Label");
-            m_CloseButton = rootElement.Q<CustomButton>("CloseButton");
+            m_CloseButton = rootElement.Q<Button>("CloseButton");
 
             if (m_CloseButton != null)
             {
-                m_CloseButton.onClicked += () => onCloseButtonClicked?.Invoke();
+                m_CloseButton.clicked += () => onCloseButtonClicked?.Invoke();
             }
         }
     }

@@ -26,7 +26,7 @@ namespace GameUI
 
         VisualElement m_CharacterPanelContainer;
 
-        CustomButton m_CharacterButton;
+        Button m_CharacterButton;
 
         DraggablePanel m_DraggablePanel;
 
@@ -41,10 +41,10 @@ namespace GameUI
             m_CharacterPanelContainer = rootElement.Q<VisualElement>("CharacterPanelContainer");
             m_CharacterPanel = new CharacterPanel(this, m_CharacterPanelContainer.Q<VisualElement>("CharacterPanel"));
 
-            m_CharacterButton = rootElement.Q<CustomButton>("CharacterButton");
-            m_CharacterButton.onClicked += OnCharacterButtonClicked;
+            m_CharacterButton = rootElement.Q<Button>("CharacterButton");
+            m_CharacterButton.clicked += OnCharacterButtonClicked;
 
-            m_DraggablePanel = new DraggablePanel(this, rootElement.Q<VisualElement>("DraggedItemPanel"));
+            m_DraggablePanel = new DraggablePanel(this, rootElement.Q("DraggablePanel"));
         }
 
         void OnCharacterButtonClicked()

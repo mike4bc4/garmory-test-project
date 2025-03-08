@@ -1,149 +1,69 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using InputUtilities;
+using SchedulerUtility;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 namespace GameUI
 {
     public class PassthroughControl : Control
     {
-        VisualElement m_PreviousElementUnderneath;
+        public event Action onPointerMove;
+        public event Action onPointerUp;
+        public event Action onPointerDown;
 
-        bool m_Enabled;
+        Vector2 m_PointerPosition;
 
-        public bool enabled
+        public Vector2 pointerPosition
         {
-            get => m_Enabled;
-            set => SetEnabled(value);
+            get => m_PointerPosition;
+        }
+
+        Vector2 m_PreviousPointerPosition;
+        Vector2 m_Delta;
+
+        public Vector2 delta
+        {
+            get => m_Delta;
         }
 
         public PassthroughControl(VisualElement rootElement) : base(rootElement)
         {
-            SetEnabled(true);
-        }
+            rootElement.pickingMode = PickingMode.Ignore;
 
-        void OnMouseDown(MouseDownEvent evt)
-        {
-            var elementUnderneath = GetElementUnderneath(evt.mousePosition);
-            if (elementUnderneath != null)
+            var moveAction = new InputAction(binding: "<Pointer>/position");
+            moveAction.Enable();
+
+            var pressAction = new InputAction(binding: "<Pointer>/press");
+            pressAction.Enable();
+
+            moveAction.performed += ctx =>
             {
-                var newEvent = new Event();
-                newEvent.type = EventType.MouseDown;
-                newEvent.mousePosition = evt.mousePosition;
-                using (MouseDownEvent mouseDownEvent = MouseDownEvent.GetPooled(newEvent))
+                var worldBound = rootElement.panel.visualTree.worldBound;
+                var scaleFactor = new Vector2(worldBound.width / Screen.width, worldBound.height / Screen.height);
+                var pointerPosition = moveAction.ReadValue<Vector2>();
+                m_PointerPosition = new Vector2(pointerPosition.x, Screen.height - pointerPosition.y) * scaleFactor;
+
+                if (m_PointerPosition != m_PreviousPointerPosition)
                 {
-                    mouseDownEvent.target = elementUnderneath;
-                    elementUnderneath.SendEvent(mouseDownEvent);
+                    m_Delta = m_PointerPosition - m_PreviousPointerPosition;
+                    onPointerMove?.Invoke();
+                    m_PreviousPointerPosition = m_PointerPosition;
                 }
-            }
-        }
+            };
 
-        void OnMouseUp(MouseUpEvent evt)
-        {
-            var elementUnderneath = GetElementUnderneath(evt.mousePosition);
-            if (elementUnderneath != null)
+            pressAction.started += ctx =>
             {
-                var newEvent = new Event();
-                newEvent.type = EventType.MouseUp;
-                newEvent.mousePosition = evt.mousePosition;
-                using (MouseUpEvent mouseUpEvent = MouseUpEvent.GetPooled(newEvent))
-                {
-                    mouseUpEvent.target = elementUnderneath;
-                    elementUnderneath.SendEvent(mouseUpEvent);
-                }
-            }
-        }
+                onPointerDown?.Invoke();
+            };
 
-        void OnMouseMove(MouseMoveEvent evt)
-        {
-            var elementUnderneath = GetElementUnderneath(evt.mousePosition);
-            if (elementUnderneath != null)
+            pressAction.canceled += ctx =>
             {
-                {
-                    var newEvent = new Event();
-                    newEvent.type = EventType.MouseMove;
-                    newEvent.mousePosition = evt.mousePosition;
-                    using (MouseMoveEvent mouseMoveEvent = MouseMoveEvent.GetPooled(newEvent))
-                    {
-                        mouseMoveEvent.target = elementUnderneath;
-                        elementUnderneath.SendEvent(mouseMoveEvent);
-                    }
-                }
-
-                if (elementUnderneath != m_PreviousElementUnderneath)
-                {
-                    var newEvent = new Event();
-                    newEvent.type = EventType.MouseMove;
-                    newEvent.mousePosition = evt.mousePosition;
-                    using (MouseEnterEvent mouseEnterEvent = MouseEnterEvent.GetPooled(newEvent))
-                    {
-                        mouseEnterEvent.target = elementUnderneath;
-                        elementUnderneath.SendEvent(mouseEnterEvent);
-                    }
-                }
-            }
-
-            if (elementUnderneath != m_PreviousElementUnderneath && m_PreviousElementUnderneath != null)
-            {
-                var newEvent = new Event();
-                newEvent.type = EventType.MouseMove;
-                newEvent.mousePosition = evt.mousePosition;
-                using (MouseLeaveEvent mouseLeaveEvent = MouseLeaveEvent.GetPooled(newEvent))
-                {
-                    mouseLeaveEvent.target = m_PreviousElementUnderneath;
-                    m_PreviousElementUnderneath.SendEvent(mouseLeaveEvent);
-                }
-            }
-
-            m_PreviousElementUnderneath = elementUnderneath;
-        }
-
-        void OnWheelEvent(WheelEvent evt)
-        {
-            var elementUnderneath = GetElementUnderneath(evt.mousePosition);
-            if (elementUnderneath != null)
-            {
-                var newEvent = new Event();
-                newEvent.type = EventType.MouseUp;
-                newEvent.mousePosition = evt.mousePosition;
-                newEvent.delta = evt.delta;
-                using (WheelEvent wheelEvent = WheelEvent.GetPooled(newEvent))
-                {
-                    wheelEvent.target = elementUnderneath;
-                    elementUnderneath.SendEvent(wheelEvent);
-                }
-            }
-        }
-
-        public void SetEnabled(bool enabled)
-        {
-            m_Enabled = enabled;
-            if (enabled)
-            {
-                rootElement.RegisterCallback<MouseDownEvent>(OnMouseDown);
-                rootElement.RegisterCallback<MouseUpEvent>(OnMouseUp);
-                rootElement.RegisterCallback<MouseMoveEvent>(OnMouseMove);
-                rootElement.RegisterCallback<WheelEvent>(OnWheelEvent);
-            }
-            else
-            {
-                rootElement.UnregisterCallback<MouseDownEvent>(OnMouseDown);
-                rootElement.UnregisterCallback<MouseUpEvent>(OnMouseUp);
-                rootElement.UnregisterCallback<MouseMoveEvent>(OnMouseMove);
-                rootElement.UnregisterCallback<WheelEvent>(OnWheelEvent);
-            }
-        }
-
-        VisualElement GetElementUnderneath(Vector2 position)
-        {
-            var pickedElements = new List<VisualElement>();
-            rootElement.panel.PickAll(position, pickedElements);
-            if (pickedElements.Count > 1 && pickedElements[0] == rootElement)
-            {
-                return pickedElements[1];
-            }
-
-            return null;
+                onPointerUp?.Invoke();
+            };
         }
     }
 }

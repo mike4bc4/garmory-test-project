@@ -15,13 +15,13 @@ namespace GameUI
             get => m_CharacterPanel;
         }
 
-        CustomButton m_InventoryButton;
+        Button m_InventoryButton;
 
         public CharacterControlsPanel(CharacterPanel characterPanel, VisualElement rootElement) : base(rootElement)
         {
             m_CharacterPanel = characterPanel;
-            m_InventoryButton = rootElement.Q<CustomButton>("InventoryButton");
-            m_InventoryButton.onClicked += OnInventoryButtonClicked;
+            m_InventoryButton = rootElement.Q<Button>("InventoryButton");
+            m_InventoryButton.clicked += OnInventoryButtonClicked;
         }
 
         void OnInventoryButtonClicked()

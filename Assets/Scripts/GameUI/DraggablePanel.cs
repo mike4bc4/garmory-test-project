@@ -23,7 +23,6 @@ namespace GameUI
             get => m_MainPanel;
         }
 
-        Vector2 m_MousePosition;
         IDraggableControl m_DraggableControl;
 
         public IDraggableControl draggableControl
@@ -51,11 +50,10 @@ namespace GameUI
         public DraggablePanel(MainPanel mainPanel, VisualElement rootElement) : base(rootElement)
         {
             m_MainPanel = mainPanel;
-            rootElement.RegisterCallback<MouseMoveEvent>(OnMouseMove);
-            rootElement.RegisterCallback<MouseUpEvent>(OnMouseUp);
+            onPointerUp += OnPointerUp;
         }
 
-        void OnMouseUp(MouseUpEvent evt)
+        void OnPointerUp()
         {
             if (m_DraggableControl != null)
             {
@@ -64,11 +62,6 @@ namespace GameUI
             }
 
             SetDraggable(null);
-        }
-
-        void OnMouseMove(MouseMoveEvent evt)
-        {
-            m_MousePosition = evt.mousePosition;
         }
 
         public void SetDraggable(IDraggableControl draggableControl)
@@ -87,26 +80,16 @@ namespace GameUI
             if (m_DraggableControl != null)
             {
                 m_Draggable = draggableControl.CreateDraggable();
-                // SetDraggablePickingMode(PickingMode.Ignore);
                 m_Draggable.AddToClassList(k_DraggableClassName);
                 rootElement.Add(m_Draggable);
                 Scheduler.OnUpdate += MoveDraggable;
             }
         }
 
-        // void SetDraggablePickingMode(PickingMode pickingMode)
-        // {
-        //     var elements = m_Draggable.Query<VisualElement>().ToList();
-        //     foreach (var element in elements)
-        //     {
-        //         element.pickingMode = pickingMode;
-        //     }
-        // }
-
         void MoveDraggable()
         {
-            m_Draggable.style.left = m_MousePosition.x;
-            m_Draggable.style.top = m_MousePosition.y;
+            m_Draggable.style.left = pointerPosition.x;
+            m_Draggable.style.top = pointerPosition.y;
         }
     }
 }
