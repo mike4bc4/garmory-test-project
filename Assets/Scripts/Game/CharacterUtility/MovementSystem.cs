@@ -56,7 +56,6 @@ namespace Game.CharacterUtility
             get => m_Character;
         }
 
-        InputActions m_InputActions;
         InputAction m_MoveAction;
         bool m_CameraLocked;
 
@@ -65,16 +64,14 @@ namespace Game.CharacterUtility
             m_Character = character;
             m_Settings = settings;
 
-            m_InputActions = new InputActions();
-            m_InputActions.gameplay.Enable();
-            m_MoveAction = m_InputActions.gameplay.move;
+            m_MoveAction = InputManager.InputActions.gameplay.move;
 
-            m_InputActions.gameplay.cameraLock.started += ctx =>
+            InputManager.InputActions.gameplay.cameraLock.started += ctx =>
             {
                 m_CameraLocked = true;
             };
 
-            m_InputActions.gameplay.cameraLock.canceled += ctx =>
+            InputManager.InputActions.gameplay.cameraLock.canceled += ctx =>
             {
                 m_CameraLocked = false;
             };

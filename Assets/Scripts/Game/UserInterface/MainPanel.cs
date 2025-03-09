@@ -55,6 +55,13 @@ namespace Game.UserInterface
             get => m_ItemTooltipPanel;
         }
 
+        WelcomePanel m_WelcomePanel;
+
+        public WelcomePanel welcomePanel
+        {
+            get => m_WelcomePanel;
+        }
+
         public MainPanel(UserInterfaceManager uiManager, VisualElement rootElement) : base(rootElement)
         {
             m_UIManager = uiManager;
@@ -68,6 +75,9 @@ namespace Game.UserInterface
             m_FloatersPanel = new FloatersPanel(this, rootElement.Q("FloatersPanel"));
             m_ObjectivePanel = new ObjectivePanel(this, rootElement.Q("ObjectivePanel"));
             m_ItemTooltipPanel = new ItemTooltipPanel(this, rootElement.Q("ItemTooltipPanel"));
+
+            m_WelcomePanel = new WelcomePanel(this);
+            rootElement.Add(m_WelcomePanel);
         }
 
         void OnCharacterButtonClicked()

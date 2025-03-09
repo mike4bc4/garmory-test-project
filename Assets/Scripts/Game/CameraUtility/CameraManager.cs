@@ -25,7 +25,6 @@ namespace Game.CameraUtility
         [SerializeField] float m_InitialAlpha;
         [SerializeField] float m_InitialBeta;
 
-        InputActions m_InputActions;
         bool m_Grabbed;
         float m_Radius;
         float m_Alpha;
@@ -36,10 +35,7 @@ namespace Game.CameraUtility
         {
             s_Instance = this;
 
-            m_InputActions = new InputActions();
-            m_InputActions.gameplay.Enable();
-
-            m_InputActions.gameplay.cameraGrab.started += ctx =>
+            InputManager.InputActions.gameplay.cameraGrab.started += ctx =>
             {
                 if (!UserInterfaceManager.IsPointerOverControl())
                 {
@@ -48,7 +44,7 @@ namespace Game.CameraUtility
                 }
             };
 
-            m_InputActions.gameplay.cameraGrab.canceled += ctx =>
+            InputManager.InputActions.gameplay.cameraGrab.canceled += ctx =>
             {
                 if (!UserInterfaceManager.IsPointerOverControl())
                 {
@@ -57,7 +53,7 @@ namespace Game.CameraUtility
                 }
             };
 
-            m_InputActions.gameplay.cameraLock.started += ctx =>
+            InputManager.InputActions.gameplay.cameraLock.started += ctx =>
             {
                 if (!UserInterfaceManager.IsPointerOverControl())
                 {
@@ -66,7 +62,7 @@ namespace Game.CameraUtility
                 }
             };
 
-            m_InputActions.gameplay.cameraLock.canceled += ctx =>
+            InputManager.InputActions.gameplay.cameraLock.canceled += ctx =>
             {
                 if (!UserInterfaceManager.IsPointerOverControl())
                 {
@@ -91,7 +87,7 @@ namespace Game.CameraUtility
 
         void UpdateCamera()
         {
-            var delta = m_Grabbed ? m_InputActions.gameplay.cameraRotate.ReadValue<Vector2>() : Vector2.zero;
+            var delta = m_Grabbed ? InputManager.InputActions.gameplay.cameraRotate.ReadValue<Vector2>() : Vector2.zero;
             m_Delta = Vector2.Lerp(m_Delta, delta, Time.deltaTime * m_Smooth);
             m_Alpha -= m_Delta.x * 0.001f * m_Speed;
 

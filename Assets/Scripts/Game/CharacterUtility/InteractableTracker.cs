@@ -54,16 +54,12 @@ namespace Game.CharacterUtility
 
         IScheduledItem m_TrackScheduledItem;
 
-        InputActions m_InputActions;
-
         public InteractableTracker(Character character, Settings settings)
         {
             m_Character = character;
             m_Settings = settings;
 
-            m_InputActions = new InputActions();
-            m_InputActions.Enable();
-            m_InputActions.gameplay.interact.performed += ctx =>
+            InputManager.InputActions.gameplay.interact.performed += ctx =>
             {
                 if (m_CurrentInteractable != null)
                 {

@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="WelcomePanel" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5);">
+        <ui:VisualElement style="margin-top: auto; margin-right: auto; margin-bottom: auto; margin-left: auto; width: 600px; height: 400px; background-color: rgb(255, 255, 255); padding-top: 16px; padding-right: 24px; padding-bottom: 16px; padding-left: 24px;">
+            <ui:Label text="Welcome!" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 16px; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: middle-center; font-size: 24px;" />
+            <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" style="flex-grow: 1; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-bottom: 16px;">
+                <ui:Label text="Hello and welcome to this fun little game project! Here are a few important details to get you started.&#10;&#10;Navigation:&#10;1. You can control the camera by holding down the left or right mouse button. Use the left button to look around freely, and the right button to move your character in the direction you&apos;re facing.&#10;2. Move your character using the W, A, S, and D keys.&#10;3. To attack enemies in front of you, just hit the spacebar.&#10;4. Press the E key to interact with various objects.&#10;5. You can access your character&apos;s user interface by clicking the button located in the bottom right corner of the screen.&#10;&#10;Objective:&#10;Your goal is straightforward: grab your gear from the armory, put together the best equipment set (or go with just your fists if you like), and take down as many training dummies as you can!" display-tooltip-when-elided="true" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; white-space: normal; font-size: 18px;" />
+            </ui:ScrollView>
+            <ui:Button text="Continue" display-tooltip-when-elided="true" name="ContinueButton" style="margin-top: auto; margin-right: auto; margin-bottom: auto; margin-left: auto; font-size: 18px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -26,54 +26,6 @@ namespace InputUtility
     ""name"": ""InputActions"",
     ""maps"": [
         {
-            ""name"": ""userInterface"",
-            ""id"": ""2f370c76-663a-4779-9f67-de91053107f9"",
-            ""actions"": [
-                {
-                    ""name"": ""pointerMove"",
-                    ""type"": ""Value"",
-                    ""id"": ""11fbea4d-2131-48a1-81ee-ac84576ca1cb"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""pointerPress"",
-                    ""type"": ""Button"",
-                    ""id"": ""128ee287-cd27-467a-a554-71f28315405f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""13da705d-ebb7-49d5-99d7-97ec1ed9864d"",
-                    ""path"": ""<Pointer>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""pointerMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6eede1a3-2c3e-4fbb-88f6-589daf6f064e"",
-                    ""path"": ""<Pointer>/press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""pointerPress"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""gameplay"",
             ""id"": ""7a0c649b-a4f7-4bfa-8b33-68b73732bd54"",
             ""actions"": [
@@ -268,10 +220,6 @@ namespace InputUtility
     ],
     ""controlSchemes"": []
 }");
-            // userInterface
-            m_userInterface = asset.FindActionMap("userInterface", throwIfNotFound: true);
-            m_userInterface_pointerMove = m_userInterface.FindAction("pointerMove", throwIfNotFound: true);
-            m_userInterface_pointerPress = m_userInterface.FindAction("pointerPress", throwIfNotFound: true);
             // gameplay
             m_gameplay = asset.FindActionMap("gameplay", throwIfNotFound: true);
             m_gameplay_move = m_gameplay.FindAction("move", throwIfNotFound: true);
@@ -338,60 +286,6 @@ namespace InputUtility
         {
             return asset.FindBinding(bindingMask, out action);
         }
-
-        // userInterface
-        private readonly InputActionMap m_userInterface;
-        private List<IUserInterfaceActions> m_UserInterfaceActionsCallbackInterfaces = new List<IUserInterfaceActions>();
-        private readonly InputAction m_userInterface_pointerMove;
-        private readonly InputAction m_userInterface_pointerPress;
-        public struct UserInterfaceActions
-        {
-            private @InputActions m_Wrapper;
-            public UserInterfaceActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-            public InputAction @pointerMove => m_Wrapper.m_userInterface_pointerMove;
-            public InputAction @pointerPress => m_Wrapper.m_userInterface_pointerPress;
-            public InputActionMap Get() { return m_Wrapper.m_userInterface; }
-            public void Enable() { Get().Enable(); }
-            public void Disable() { Get().Disable(); }
-            public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(UserInterfaceActions set) { return set.Get(); }
-            public void AddCallbacks(IUserInterfaceActions instance)
-            {
-                if (instance == null || m_Wrapper.m_UserInterfaceActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_UserInterfaceActionsCallbackInterfaces.Add(instance);
-                @pointerMove.started += instance.OnPointerMove;
-                @pointerMove.performed += instance.OnPointerMove;
-                @pointerMove.canceled += instance.OnPointerMove;
-                @pointerPress.started += instance.OnPointerPress;
-                @pointerPress.performed += instance.OnPointerPress;
-                @pointerPress.canceled += instance.OnPointerPress;
-            }
-
-            private void UnregisterCallbacks(IUserInterfaceActions instance)
-            {
-                @pointerMove.started -= instance.OnPointerMove;
-                @pointerMove.performed -= instance.OnPointerMove;
-                @pointerMove.canceled -= instance.OnPointerMove;
-                @pointerPress.started -= instance.OnPointerPress;
-                @pointerPress.performed -= instance.OnPointerPress;
-                @pointerPress.canceled -= instance.OnPointerPress;
-            }
-
-            public void RemoveCallbacks(IUserInterfaceActions instance)
-            {
-                if (m_Wrapper.m_UserInterfaceActionsCallbackInterfaces.Remove(instance))
-                    UnregisterCallbacks(instance);
-            }
-
-            public void SetCallbacks(IUserInterfaceActions instance)
-            {
-                foreach (var item in m_Wrapper.m_UserInterfaceActionsCallbackInterfaces)
-                    UnregisterCallbacks(item);
-                m_Wrapper.m_UserInterfaceActionsCallbackInterfaces.Clear();
-                AddCallbacks(instance);
-            }
-        }
-        public UserInterfaceActions @userInterface => new UserInterfaceActions(this);
 
         // gameplay
         private readonly InputActionMap m_gameplay;
@@ -486,11 +380,6 @@ namespace InputUtility
             }
         }
         public GameplayActions @gameplay => new GameplayActions(this);
-        public interface IUserInterfaceActions
-        {
-            void OnPointerMove(InputAction.CallbackContext context);
-            void OnPointerPress(InputAction.CallbackContext context);
-        }
         public interface IGameplayActions
         {
             void OnMove(InputAction.CallbackContext context);

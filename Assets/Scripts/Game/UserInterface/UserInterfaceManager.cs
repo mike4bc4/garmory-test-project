@@ -44,6 +44,13 @@ namespace Game.UserInterface
             get => m_ItemTooltipControl;
         }
 
+        [SerializeField] VisualTreeAsset m_WelcomePanel;
+
+        public VisualTreeAsset welcomePanel
+        {
+            get => m_WelcomePanel;
+        }
+
         UIDocument m_UIDocument;
 
         public UIDocument uiDocument

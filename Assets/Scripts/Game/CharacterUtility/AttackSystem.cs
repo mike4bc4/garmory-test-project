@@ -58,8 +58,6 @@ namespace Game.CharacterUtility
             get => m_Settings;
         }
 
-        InputActions m_InputActions;
-
         bool m_CanAttack;
 
         public AttackSystem(Character character, Settings settings)
@@ -69,9 +67,7 @@ namespace Game.CharacterUtility
 
             m_CanAttack = true;
 
-            m_InputActions = new InputActions();
-            m_InputActions.gameplay.attack.Enable();
-            m_InputActions.gameplay.attack.performed += ctx =>
+            InputManager.InputActions.gameplay.attack.performed += ctx =>
             {
                 if (m_CanAttack)
                 {
