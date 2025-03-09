@@ -23,6 +23,8 @@ namespace Game.UserInterface
         public event Action onReleased;
         public event Action onClicked;
         public event Action onDragStarted;
+        public event Action onLeave;
+        public event Action onMove;
 
         VisualElement m_BackgroundImageElement;
         VisualElement m_RarityImageElement;
@@ -110,6 +112,7 @@ namespace Game.UserInterface
                 rootElement.RegisterCallback<MouseDownEvent>(OnMouseDown);
                 rootElement.RegisterCallback<MouseEnterEvent>(OnMouseEnter);
                 rootElement.RegisterCallback<MouseMoveEvent>(OnMouseMove);
+                rootElement.RegisterCallback<MouseLeaveEvent>(OnMouseLeave);
             }
             else
             {
@@ -117,6 +120,7 @@ namespace Game.UserInterface
                 rootElement.UnregisterCallback<MouseDownEvent>(OnMouseDown);
                 rootElement.UnregisterCallback<MouseEnterEvent>(OnMouseEnter);
                 rootElement.UnregisterCallback<MouseMoveEvent>(OnMouseMove);
+                rootElement.UnregisterCallback<MouseLeaveEvent>(OnMouseLeave);
             }
         }
 
@@ -145,12 +149,18 @@ namespace Game.UserInterface
 
         void OnMouseMove(MouseMoveEvent evt)
         {
+            onMove?.Invoke();
             if (!m_Dragged && m_Pressed && Vector2.Distance(m_PressedPosition, evt.mousePosition) > k_DragRadius)
             {
                 m_Pressed = false;
                 m_Dragged = true;
                 onDragStarted?.Invoke();
             }
+        }
+
+        void OnMouseLeave(MouseLeaveEvent evt)
+        {
+            onLeave?.Invoke();
         }
 
         public void SetSelected(bool selected)

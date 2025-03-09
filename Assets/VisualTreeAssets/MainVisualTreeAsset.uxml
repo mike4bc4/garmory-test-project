@@ -1,5 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="ItemTooltip" src="project://database/Assets/VisualTreeAssets/ItemTooltip.uxml?fileID=9197481963319205126&amp;guid=8eaeab2ab3f5af149856d3279894458e&amp;type=3#ItemTooltip" />
     <Style src="project://database/Assets/Styles/Style.uss?fileID=7433441132597879392&amp;guid=59ff6ebf5aed4734baf1100afe3193de&amp;type=3#Style" />
     <ui:VisualElement name="MainPanel" picking-mode="Ignore" style="flex-grow: 1;">
         <ui:VisualElement name="FloatersPanel" picking-mode="Ignore" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
@@ -51,8 +50,6 @@
             <ui:VisualElement name="ObjectivePanel" style="flex-grow: 1; width: 300px;" />
         </ui:VisualElement>
         <ui:VisualElement name="DraggablePanel" picking-mode="Ignore" style="position: absolute; left: 0; top: -1px; right: 0; bottom: 1px;" />
-        <ui:VisualElement name="ItemTooltipPanel" picking-mode="Ignore" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
-            <ui:Instance template="ItemTooltip" name="ItemTooltip" style="position: absolute; height: 80px; width: 144px; top: 394px; left: 526px;" />
-        </ui:VisualElement>
+        <ui:VisualElement name="ItemTooltipPanel" picking-mode="Ignore" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
     </ui:VisualElement>
 </ui:UXML>

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using Server;
 using UnityEngine;
 
@@ -13,6 +15,11 @@ namespace Game.EquipmentItems
         public string name
         {
             get => m_Name;
+        }
+
+        public string displayName
+        {
+            get => GetDisplayName();
         }
 
         Category m_Category;
@@ -146,6 +153,12 @@ namespace Game.EquipmentItems
             m_AttackSpeed = new PercentageAttribute("Attack Speed", AttributeType.AttackSpeed) { value = itemWrapper.AttackSpeed };
             m_MovementSpeed = new PercentageAttribute("Movement Speed", AttributeType.MovementSpeed) { value = itemWrapper.MovementSpeed };
             m_Luck = new PercentageAttribute("Luck", AttributeType.Luck) { value = itemWrapper.Luck };
+        }
+
+        public string GetDisplayName()
+        {
+            string[] split = Regex.Split(name, @"(?<!^)(?=[A-Z])");
+            return string.Join(' ', split);
         }
     }
 }

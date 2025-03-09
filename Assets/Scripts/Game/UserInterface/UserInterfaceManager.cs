@@ -37,6 +37,13 @@ namespace Game.UserInterface
             get => m_AttributeControl;
         }
 
+        [SerializeField] VisualTreeAsset m_ItemTooltipControl;
+
+        public VisualTreeAsset itemTooltipControl
+        {
+            get => m_ItemTooltipControl;
+        }
+
         UIDocument m_UIDocument;
 
         public UIDocument uiDocument

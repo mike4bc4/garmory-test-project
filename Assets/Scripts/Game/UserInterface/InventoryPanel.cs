@@ -32,21 +32,6 @@ namespace Game.UserInterface
         GridContainer m_GridContainer;
         List<ItemSlotControl> m_ItemSlots;
 
-        ItemDescriptionPanel m_DescriptionPanel;
-
-        public ItemDescriptionPanel descriptionPanel
-        {
-            get => m_DescriptionPanel;
-        }
-
-        ItemSlotControl m_SelectedItemSlot;
-
-        public ItemSlotControl selectedItemSlot
-        {
-            get => m_SelectedItemSlot;
-            set => SetSelectedItemSlot(value);
-        }
-
         public EquipmentPanel equipmentPanel
         {
             get => characterLeftPanel.characterPanel.rightPanel.equipmentPanel;
@@ -55,6 +40,11 @@ namespace Game.UserInterface
         public DraggablePanel draggablePanel
         {
             get => characterLeftPanel.characterPanel.mainPanel.draggablePanel;
+        }
+
+        public ItemTooltipPanel itemTooltipPanel
+        {
+            get => characterLeftPanel.characterPanel.mainPanel.itemTooltipPanel;
         }
 
         Inventory m_Inventory;
@@ -76,8 +66,6 @@ namespace Game.UserInterface
 
             m_GridContainer = new GridContainer(rootElement.Q<VisualElement>("GridContainer"));
             m_ItemSlots = new List<ItemSlotControl>();
-
-            m_DescriptionPanel = new ItemDescriptionPanel(rootElement.Q<VisualElement>("DescriptionPanel"));
 
             Close();
             inventory = null;
@@ -123,7 +111,6 @@ namespace Game.UserInterface
 
         void Clear()
         {
-            selectedItemSlot = null;
             m_GridContainer.Clear();
             foreach (var itemSlot in m_ItemSlots)
             {
@@ -163,6 +150,9 @@ namespace Game.UserInterface
                     {
                         draggablePanel.draggableControl = itemSlot;
                     }
+
+                    itemTooltipPanel.tooltip.item = null;
+                    itemTooltipPanel.tooltip.compareItem = null;
                 };
 
                 itemSlot.onReleased += () =>
@@ -171,48 +161,23 @@ namespace Game.UserInterface
                         && draggablePanel.previousDraggableControl is ItemSlotControl draggedItemSlot)
                     {
                         (itemSlot.item, draggedItemSlot.item) = (draggedItemSlot.item, itemSlot.item);
-                        if (draggedItemSlot.selected)
-                        {
-                            selectedItemSlot = itemSlot;
-                        }
-
-                        // Refresh item description panel as dropped item might have been taken off from character.
-                        RefreshItemDescriptionPanel();
                     }
                 };
 
-                itemSlot.onClicked += () => selectedItemSlot = itemSlot;
-            }
-        }
+                itemSlot.onMove += () =>
+                {
+                    if (draggablePanel.draggableControl == null)
+                    {
+                        itemTooltipPanel.tooltip.item = itemSlot.item;
+                        itemTooltipPanel.tooltip.compareItem = itemSlot.item != null ? equipmentPanel.GetItemSlot(itemSlot.item.category)?.item : null;
+                    }
+                };
 
-        public void RefreshItemDescriptionPanel()
-        {
-            if (m_SelectedItemSlot != null)
-            {
-                descriptionPanel.item = m_SelectedItemSlot.item;
-                descriptionPanel.compareItem = equipmentPanel.GetItemSlot(m_SelectedItemSlot.item.category)?.item;
-            }
-        }
-
-        public void SetSelectedItemSlot(ItemSlotControl selectedItemSlot)
-        {
-            var previousSelectedItemSlot = m_SelectedItemSlot;
-
-            m_SelectedItemSlot = null;
-            if (previousSelectedItemSlot != null)
-            {
-                previousSelectedItemSlot.selected = false;
-            }
-
-            descriptionPanel.item = null;
-            descriptionPanel.compareItem = null;
-
-            if (previousSelectedItemSlot != selectedItemSlot && selectedItemSlot?.item != null)
-            {
-                m_SelectedItemSlot = selectedItemSlot;
-                selectedItemSlot.selected = true;
-                descriptionPanel.item = selectedItemSlot.item;
-                descriptionPanel.compareItem = equipmentPanel.GetItemSlot(selectedItemSlot.item.category)?.item;
+                itemSlot.onLeave += () =>
+                {
+                    itemTooltipPanel.tooltip.item = null;
+                    itemTooltipPanel.tooltip.compareItem = null;
+                };
             }
         }
     }

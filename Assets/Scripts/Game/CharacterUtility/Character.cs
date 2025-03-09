@@ -81,12 +81,15 @@ namespace Game.CharacterUtility
 
         void OnEquipmentChanged(int itemIndex)
         {
-            var item = m_Equipment.items[itemIndex];
-            if (item != null)
+            m_Attributes = Item.AvailableAttributes;
+            foreach (var item in equipment.items)
             {
-                for (int i = 0; i < item.attributes.Count; i++)
+                if (item != null)
                 {
-                    m_Attributes[i].value += item.attributes[i].value;
+                    for (int i = 0; i < item.attributes.Count; i++)
+                    {
+                        m_Attributes[i].value += item.attributes[i].value;
+                    }
                 }
             }
         }

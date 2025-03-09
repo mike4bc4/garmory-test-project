@@ -38,6 +38,11 @@ namespace Game.UserInterface
             set => SetEquipment(value);
         }
 
+        public ItemTooltipPanel itemTooltipPanel
+        {
+            get => characterRightPanel.characterPanel.mainPanel.itemTooltipPanel;
+        }
+
         bool m_AllowDataChanges;
         bool m_AllowViewChanges;
 
@@ -92,6 +97,9 @@ namespace Game.UserInterface
                     {
                         draggablePanel.draggableControl = itemSlot;
                     }
+                    
+                    itemTooltipPanel.tooltip.item = null;
+                    itemTooltipPanel.tooltip.compareItem = null;
                 };
 
                 itemSlot.onReleased += () =>
@@ -101,21 +109,23 @@ namespace Game.UserInterface
                         && draggedItemSlot.item.category == itemSlot.category)
                     {
                         (itemSlot.item, draggedItemSlot.item) = (draggedItemSlot.item, itemSlot.item);
-                        if (draggedItemSlot.selected)
-                        {
-                            inventoryPanel.selectedItemSlot = itemSlot;
-                        }
-                        else if (itemSlot.selected)
-                        {
-                            inventoryPanel.selectedItemSlot = draggedItemSlot;
-                        }
-
-                        // Refresh item description panel as dropped item might have been taken off from character.
-                        inventoryPanel.RefreshItemDescriptionPanel();
                     }
                 };
 
-                itemSlot.onClicked += () => inventoryPanel.selectedItemSlot = itemSlot;
+                itemSlot.onMove += () =>
+                {
+                    if (draggablePanel.draggableControl == null)
+                    {
+                        itemTooltipPanel.tooltip.item = itemSlot.item;
+                        itemTooltipPanel.tooltip.compareItem = itemSlot.item;
+                    }
+                };
+
+                itemSlot.onLeave += () =>
+                {
+                    itemTooltipPanel.tooltip.item = null;
+                    itemTooltipPanel.tooltip.compareItem = null;
+                };
             }
 
             equipment = null;

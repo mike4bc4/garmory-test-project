@@ -298,3 +298,23 @@ VisualElement {
     background-color: rgba(0, 0, 0, 0);
     font-size: 28px;
 }
+
+.item-tooltip__rarity--common {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityCommon.png?fileID=2800000&guid=5be4320d448dd9040a0c9abd3f40f100&type=3#ItemRarityCommon");
+}
+
+.item-tooltip__rarity--uncommon {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityUncommon.png?fileID=2800000&guid=6ea0dbadcf0b28f489fb0a777ef529f4&type=3#ItemRarityUncommon");
+}
+
+.item-tooltip__rarity--rare {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityRare.png?fileID=2800000&guid=35e96054fbe19d4468494a8ab806345f&type=3#ItemRarityRare");
+}
+
+.item-tooltip__rarity--epic {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityEpic.png?fileID=2800000&guid=72afd0e677f3d364ba6d5dce08a7b2a1&type=3#ItemRarityEpic");
+}
+
+.item-tooltip__rarity--legendary {
+    background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityLegendary.png?fileID=2800000&guid=5d4d6e1bf40b87c4db405ecb536a1222&type=3#ItemRarityLegendary");
+}
