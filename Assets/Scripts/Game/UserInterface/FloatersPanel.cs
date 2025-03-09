@@ -56,5 +56,12 @@ namespace Game.UserInterface
             m_FloatingControls.Remove(healthBar);
             rootElement.Remove(healthBar);
         }
+
+        public FloatingCombatText AddCombatText(Transform transform)
+        {
+            var combatText = new FloatingCombatText(transform);
+            rootElement.Add(combatText);
+            return combatText;
+        }
     }
 }

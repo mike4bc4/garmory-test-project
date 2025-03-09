@@ -33,7 +33,7 @@ namespace Game.UserInterface
             rootElement.style.display = DisplayStyle.None;
         }
 
-        void Update()
+        protected virtual void Update()
         {
             var scaleFactor = UserInterfaceManager.ScaleFactor;
             var screenPosition = CameraManager.Camera.WorldToScreenPoint(m_Transform.position + offset);

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Enemies;
+using Game.UserInterface;
 using Game.VisualEffects;
 using InputUtility;
 using SchedulerUtility;
@@ -80,19 +81,24 @@ namespace Game.CharacterUtility
 
                     foreach (var enemy in GetAttackedEnemies())
                     {
-                        enemy.TakeDamage(CalculateDamage());
+                        var damage = CalculateDamage(out var isCritical);
+                        var combatText = UserInterfaceManager.MainPanel.floatersPanel.AddCombatText(enemy.transform);
+                        combatText.offset = new Vector3(0f, 2.5f, 0f);
+                        combatText.text = string.Format(isCritical ? "{0:0.#}!" : "{0:0.#}", damage);
+                        enemy.TakeDamage(damage);
                     }
                 }
             };
         }
 
-        float CalculateDamage()
+        float CalculateDamage(out bool isCritical)
         {
             var damage = settings.baseDamage + character.GetAttribute(EquipmentItems.AttributeType.Damage).value;
             var critChance = character.GetAttribute(EquipmentItems.AttributeType.CriticalStrikeChance).value;
             var random = new System.Random();
-            var isCritical = random.Next(0, 100) < critChance;
-            return isCritical ? damage * 2f : damage;
+            isCritical = random.Next(0, 100) < critChance;
+            var multiplier = (float)random.NextDouble();
+            return Mathf.Round((isCritical ? damage * 2f : damage) * (0.95f + 0.1f * multiplier));
         }
 
         List<Enemy> GetAttackedEnemies()

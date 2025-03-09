@@ -10,7 +10,7 @@ namespace Game.Enemies
     {
         [SerializeField] float m_MaxHealth;
         [SerializeField] float m_Health;
-        
+
         FloatingHealthBar m_HealthBar;
 
         void Start()
