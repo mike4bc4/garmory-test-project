@@ -60,13 +60,13 @@ namespace Game.UserInterface
             if (m_Character != null)
             {
                 m_LeftPanel.inventoryPanel.inventory = character.inventory;
-                m_RightPanel.attributesPanel.equipment = character.equipment;
+                m_RightPanel.attributesPanel.character = character;
                 m_RightPanel.equipmentPanel.equipment = character.equipment;
             }
             else
             {
                 m_LeftPanel.inventoryPanel.inventory = null;
-                m_RightPanel.attributesPanel.equipment = null;
+                m_RightPanel.attributesPanel.character = null;
                 m_RightPanel.equipmentPanel.equipment = null;
             }
         }

@@ -80,10 +80,19 @@ namespace Game.CharacterUtility
 
                     foreach (var enemy in GetAttackedEnemies())
                     {
-                        enemy.TakeDamage(settings.baseDamage);
+                        enemy.TakeDamage(CalculateDamage());
                     }
                 }
             };
+        }
+
+        float CalculateDamage()
+        {
+            var damage = settings.baseDamage + character.GetAttribute(EquipmentItems.AttributeType.Damage).value;
+            var critChance = character.GetAttribute(EquipmentItems.AttributeType.CriticalStrikeChance).value;
+            var random = new System.Random();
+            var isCritical = random.Next(0, 100) < critChance;
+            return isCritical ? damage * 2f : damage;
         }
 
         List<Enemy> GetAttackedEnemies()

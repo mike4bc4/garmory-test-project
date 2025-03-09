@@ -7,6 +7,13 @@ namespace Game.EquipmentItems
 {
     public abstract class Attribute
     {
+        AttributeType m_Type;
+
+        public AttributeType type
+        {
+            get => m_Type;
+        }
+
         string m_Name;
 
         public string name
@@ -27,9 +34,10 @@ namespace Game.EquipmentItems
             get => m_Value == 0f;
         }
 
-        public Attribute(string name)
+        public Attribute(string name, AttributeType type)
         {
             m_Name = name;
+            m_Type = type;
         }
 
         public abstract string GetValueString(bool withSign = false);
@@ -39,7 +47,7 @@ namespace Game.EquipmentItems
 
     public class NumericAttribute : Attribute
     {
-        public NumericAttribute(string name) : base(name) { }
+        public NumericAttribute(string name, AttributeType type) : base(name, type) { }
 
         public override string GetValueString(bool withSign = false)
         {
@@ -48,13 +56,13 @@ namespace Game.EquipmentItems
 
         public override Attribute Clone()
         {
-            return new NumericAttribute(name) { value = value };
+            return new NumericAttribute(name, type) { value = value };
         }
     }
 
     public class PercentageAttribute : Attribute
     {
-        public PercentageAttribute(string name) : base(name) { }
+        public PercentageAttribute(string name, AttributeType type) : base(name, type) { }
 
         public override string GetValueString(bool withSign = false)
         {
@@ -63,7 +71,7 @@ namespace Game.EquipmentItems
 
         public override Attribute Clone()
         {
-            return new PercentageAttribute(name) { value = value };
+            return new PercentageAttribute(name, type) { value = value };
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Game.EquipmentItems;
 using UnityEngine;
 
 namespace Game.CharacterUtility
@@ -41,13 +42,53 @@ namespace Game.CharacterUtility
 
         AttackSystem m_AttackSystem;
 
+        public AttackSystem attackSystem
+        {
+            get => m_AttackSystem;
+        }
+
+        List<Attribute> m_Attributes;
+
+        public IReadOnlyList<Attribute> attributes
+        {
+            get => m_Attributes;
+        }
+
         void Start()
         {
             m_Inventory = new Inventory(this);
             m_Equipment = new Equipment(this);
+            m_Equipment.onChanged += OnEquipmentChanged;
+
             m_MovementSystem = new MovementSystem(this, m_MovementSystemSettings);
             m_InteractableTracker = new InteractableTracker(this, m_InteractableTrackerSettings);
             m_AttackSystem = new AttackSystem(this, m_AttackSystemSettings);
+            m_Attributes = Item.AvailableAttributes;
+        }
+
+        public Attribute GetAttribute(AttributeType type)
+        {
+            foreach (var attribute in m_Attributes)
+            {
+                if (attribute.type == type)
+                {
+                    return attribute;
+                }
+            }
+
+            return null;
+        }
+
+        void OnEquipmentChanged(int itemIndex)
+        {
+            var item = m_Equipment.items[itemIndex];
+            if (item != null)
+            {
+                for (int i = 0; i < item.attributes.Count; i++)
+                {
+                    m_Attributes[i].value += item.attributes[i].value;
+                }
+            }
         }
 
         void Update()

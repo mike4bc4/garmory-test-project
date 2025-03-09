@@ -18,33 +18,33 @@ namespace Game.UserInterface
 
         VisualElement m_AttributesContainer;
 
-        Equipment m_Equipment;
+        Character m_Character;
 
-        public Equipment equipment
+        public Character character
         {
-            get => m_Equipment;
-            set => SetEquipment(value);
+            get => m_Character;
+            set => SetCharacter(value);
         }
 
         public AttributesPanel(CharacterRightPanel characterRightPanel, VisualElement rootElement) : base(rootElement)
         {
             m_CharacterRightPanel = characterRightPanel;
             m_AttributesContainer = rootElement.Q("AttributesContainer");
-            equipment = null;
+            character = null;
         }
 
-        public void SetEquipment(Equipment equipment)
+        public void SetCharacter(Character character)
         {
-            if (m_Equipment != null)
+            if (m_Character != null)
             {
-                m_Equipment.onChanged -= OnEquipmentChanged;
+                m_Character.equipment.onChanged -= OnEquipmentChanged;
             }
 
-            m_Equipment = equipment;
+            m_Character = character;
             m_AttributesContainer.Clear();
-            if (equipment != null)
+            if (m_Character != null)
             {
-                m_Equipment.onChanged += OnEquipmentChanged;
+                m_Character.equipment.onChanged += OnEquipmentChanged;
                 RefreshAttributes();
             }
         }
@@ -52,22 +52,7 @@ namespace Game.UserInterface
         void RefreshAttributes()
         {
             m_AttributesContainer.Clear();
-            var attributes = Item.AvailableAttributes;
-            foreach (var item in equipment.items)
-            {
-                // Item can be null when equipment slot is empty (just like in case of inventory).
-                if (item == null)
-                {
-                    continue;
-                }
-
-                for (int i = 0; i < item.attributes.Count; i++)
-                {
-                    attributes[i].value += item.attributes[i].value;
-                }
-            }
-
-            foreach (var attribute in attributes)
+            foreach (var attribute in character.attributes)
             {
                 if (attribute.isEmpty)
                 {

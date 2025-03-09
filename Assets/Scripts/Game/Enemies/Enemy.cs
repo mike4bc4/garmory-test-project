@@ -8,15 +8,13 @@ namespace Game.Enemies
 {
     public class Enemy : MonoBehaviour
     {
-        float m_MaxHealth;
-        float m_Health;
+        [SerializeField] float m_MaxHealth;
+        [SerializeField] float m_Health;
+        
         FloatingHealthBar m_HealthBar;
 
         void Start()
         {
-            m_MaxHealth = 100f;
-            m_Health = 50f;
-
             m_HealthBar = UserInterfaceManager.MainPanel.floatersPanel.AddHealthBar(transform);
             m_HealthBar.offset = new Vector3(0f, 2.5f, 0f);
             m_HealthBar.maxHealth = m_MaxHealth;
