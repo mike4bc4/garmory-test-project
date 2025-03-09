@@ -89,7 +89,7 @@ namespace Game.CharacterUtility
         List<Enemy> GetAttackedEnemies()
         {
             var enemies = new List<Enemy>();
-            foreach (var enemy in EnemyManager.Enemies)
+            foreach (var enemy in EnemyManager.Instance.enemies)
             {
                 var distance = Vector3.Distance(character.transform.position, enemy.transform.position);
                 var dir = (enemy.transform.position - character.transform.position).normalized;

@@ -27,6 +27,8 @@ namespace Game.UserInterface
             {
                 Scheduler.OnUpdate -= Update;
             });
+
+            rootElement.style.display = DisplayStyle.None;
         }
 
         void Update()

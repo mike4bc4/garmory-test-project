@@ -29,7 +29,7 @@ namespace Game.Enemies
 
             if (m_Health == 0)
             {
-                EnemyManager.Kill(this);
+                EnemyManager.Instance.Despawn(this);
             }
         }
 
