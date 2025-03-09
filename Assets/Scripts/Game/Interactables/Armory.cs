@@ -24,6 +24,7 @@ namespace Game.Interactables
         {
             m_Items = new List<Item>();
             m_Pin = UserInterfaceManager.MainPanel.floatersPanel.AddPin(transform, "Get closer to interact");
+            m_Pin.offset = new Vector3(0f, 1f, 0f);
         }
 
         public void Clear()

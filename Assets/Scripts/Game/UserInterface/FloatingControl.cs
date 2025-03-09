@@ -13,6 +13,8 @@ namespace Game.UserInterface
 
         Transform m_Transform;
 
+        public Vector3 offset { get; set; }
+
         public FloatingControl(Transform transform)
         {
             rootElement.AddToClassList(k_ClassName);
@@ -34,7 +36,7 @@ namespace Game.UserInterface
         void Update()
         {
             var scaleFactor = UserInterfaceManager.ScaleFactor;
-            var screenPosition = CameraManager.Camera.WorldToScreenPoint(m_Transform.position);
+            var screenPosition = CameraManager.Camera.WorldToScreenPoint(m_Transform.position + offset);
             var screenRect = new Rect(0, 0, Screen.width, Screen.height);
             var display = screenRect.Contains(screenPosition) ? DisplayStyle.Flex : DisplayStyle.None;
             rootElement.style.display = display;

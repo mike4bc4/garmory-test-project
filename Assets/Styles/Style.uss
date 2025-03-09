@@ -254,6 +254,7 @@ VisualElement {
     right: auto;
     bottom: auto;
     background-color: rgba(255, 255, 255, 0.5);
+    translate: -50% 0;
 }
 
 .floating-health-bar {

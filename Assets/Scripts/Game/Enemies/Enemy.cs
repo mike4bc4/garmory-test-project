@@ -18,6 +18,7 @@ namespace Game.Enemies
             m_Health = 50f;
 
             m_HealthBar = UserInterfaceManager.MainPanel.floatersPanel.AddHealthBar(transform);
+            m_HealthBar.offset = new Vector3(0f, 2.5f, 0f);
             m_HealthBar.maxHealth = m_MaxHealth;
             m_HealthBar.health = m_Health;
         }
