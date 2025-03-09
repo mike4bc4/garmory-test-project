@@ -18,12 +18,12 @@ namespace Game.Interactables
 
         bool m_GeneratingItems;
         bool m_InRange;
-        Pin m_Pin;
+        FloatingPin m_Pin;
 
-        void Awake()
+        void Start()
         {
             m_Items = new List<Item>();
-            m_Pin = UserInterfaceManager.MainPanel.pinPanel.AddPin(transform, "Get closer to interact");
+            m_Pin = UserInterfaceManager.MainPanel.floatersPanel.AddPin(transform, "Get closer to interact");
         }
 
         public void Clear()

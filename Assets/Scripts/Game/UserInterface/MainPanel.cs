@@ -34,11 +34,11 @@ namespace Game.UserInterface
             get => m_DraggablePanel;
         }
 
-        PinPanel m_PinPanel;
+        FloatersPanel m_FloatersPanel;
 
-        public PinPanel pinPanel
+        public FloatersPanel floatersPanel
         {
-            get => m_PinPanel;
+            get => m_FloatersPanel;
         }
 
         public MainPanel(UserInterfaceManager uiManager, VisualElement rootElement) : base(rootElement)
@@ -51,7 +51,7 @@ namespace Game.UserInterface
             m_CharacterButton.clicked += OnCharacterButtonClicked;
 
             m_DraggablePanel = new DraggablePanel(this, rootElement.Q("DraggablePanel"));
-            m_PinPanel = new PinPanel(this, rootElement.Q("PinPanel"));
+            m_FloatersPanel = new FloatersPanel(this, rootElement.Q("FloatersPanel"));
         }
 
         void OnCharacterButtonClicked()

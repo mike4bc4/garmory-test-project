@@ -45,9 +45,7 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="TestElement2" style="position: absolute; width: 60px; height: 60px; background-color: rgb(0, 255, 0); top: 724px; left: 724px;" />
-        <ui:VisualElement name="TestElement" style="position: absolute; width: 60px; height: 60px; background-color: rgb(255, 0, 0); top: 748px; left: 744px;" />
         <ui:VisualElement name="DraggablePanel" picking-mode="Ignore" style="position: absolute; left: 0; top: -1px; right: 0; bottom: 1px;" />
-        <ui:VisualElement name="PinPanel" picking-mode="Ignore" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
+        <ui:VisualElement name="FloatersPanel" picking-mode="Ignore" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
     </ui:VisualElement>
 </ui:UXML>

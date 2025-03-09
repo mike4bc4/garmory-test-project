@@ -130,6 +130,15 @@ namespace InputUtility
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""744cdd7a-c6dd-4052-919c-68fedfebbdbe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -242,6 +251,17 @@ namespace InputUtility
                     ""action"": ""interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fdc5c0f1-183d-40de-959f-ead20b37b6dd"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -260,6 +280,7 @@ namespace InputUtility
             m_gameplay_cameraRotate = m_gameplay.FindAction("cameraRotate", throwIfNotFound: true);
             m_gameplay_cameraLock = m_gameplay.FindAction("cameraLock", throwIfNotFound: true);
             m_gameplay_interact = m_gameplay.FindAction("interact", throwIfNotFound: true);
+            m_gameplay_attack = m_gameplay.FindAction("attack", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -381,6 +402,7 @@ namespace InputUtility
         private readonly InputAction m_gameplay_cameraRotate;
         private readonly InputAction m_gameplay_cameraLock;
         private readonly InputAction m_gameplay_interact;
+        private readonly InputAction m_gameplay_attack;
         public struct GameplayActions
         {
             private @InputActions m_Wrapper;
@@ -391,6 +413,7 @@ namespace InputUtility
             public InputAction @cameraRotate => m_Wrapper.m_gameplay_cameraRotate;
             public InputAction @cameraLock => m_Wrapper.m_gameplay_cameraLock;
             public InputAction @interact => m_Wrapper.m_gameplay_interact;
+            public InputAction @attack => m_Wrapper.m_gameplay_attack;
             public InputActionMap Get() { return m_Wrapper.m_gameplay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -418,6 +441,9 @@ namespace InputUtility
                 @interact.started += instance.OnInteract;
                 @interact.performed += instance.OnInteract;
                 @interact.canceled += instance.OnInteract;
+                @attack.started += instance.OnAttack;
+                @attack.performed += instance.OnAttack;
+                @attack.canceled += instance.OnAttack;
             }
 
             private void UnregisterCallbacks(IGameplayActions instance)
@@ -440,6 +466,9 @@ namespace InputUtility
                 @interact.started -= instance.OnInteract;
                 @interact.performed -= instance.OnInteract;
                 @interact.canceled -= instance.OnInteract;
+                @attack.started -= instance.OnAttack;
+                @attack.performed -= instance.OnAttack;
+                @attack.canceled -= instance.OnAttack;
             }
 
             public void RemoveCallbacks(IGameplayActions instance)
@@ -470,6 +499,7 @@ namespace InputUtility
             void OnCameraRotate(InputAction.CallbackContext context);
             void OnCameraLock(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
+            void OnAttack(InputAction.CallbackContext context);
         }
     }
 }

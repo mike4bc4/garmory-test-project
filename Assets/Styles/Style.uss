@@ -247,11 +247,31 @@ VisualElement {
     background-color: rgba(0, 255, 0, 0.5);
 }
 
-.pin {
+.floating-control {
     position: absolute;
     left: 0;
     top: 0;
     right: auto;
     bottom: auto;
     background-color: rgba(255, 255, 255, 0.5);
+}
+
+.floating-health-bar {
+    width: 200px;
+    height: 32px;
+    background-color: rgb(255, 255, 255);
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+}
+
+.floating-health-bar__bar-container {
+    flex-grow: 1;
+    background-color: rgb(0, 0, 0);
+}
+
+.floating-health-bar__bar {
+    background-color: rgb(0, 255, 0);
+    flex-grow: 1;
 }

@@ -89,5 +89,23 @@ namespace SchedulerUtility
 
             return new ScheduledItem() { action = action };
         }
+
+        public static IScheduledItem Wait(float time, Action callback)
+        {
+            float timer = time;
+            Action action = null;
+            OnUpdate += action = () =>
+            {
+                timer -= Time.deltaTime;
+                if (timer <= 0f)
+                {
+                    timer = time;
+                    callback?.Invoke();
+                    OnUpdate -= action;
+                }
+            };
+
+            return new ScheduledItem() { action = action };
+        }
     }
 }

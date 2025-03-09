@@ -106,6 +106,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "attack",
+                    "type": "Button",
+                    "id": "744cdd7a-c6dd-4052-919c-68fedfebbdbe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -216,6 +225,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fdc5c0f1-183d-40de-959f-ead20b37b6dd",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

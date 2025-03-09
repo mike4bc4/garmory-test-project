@@ -9,6 +9,8 @@ namespace Game.CharacterUtility
         [SerializeField] MovementSystem.Settings m_MovementSystemSettings;
         [SerializeField] InteractableTracker.Settings m_InteractableTrackerSettings;
 
+        [SerializeField] AttackSystem.Settings m_AttackSystemSettings;
+
         Inventory m_Inventory;
 
         public Inventory inventory
@@ -37,12 +39,15 @@ namespace Game.CharacterUtility
             get => m_InteractableTracker;
         }
 
-        void Awake()
+        AttackSystem m_AttackSystem;
+
+        void Start()
         {
             m_Inventory = new Inventory(this);
             m_Equipment = new Equipment(this);
             m_MovementSystem = new MovementSystem(this, m_MovementSystemSettings);
             m_InteractableTracker = new InteractableTracker(this, m_InteractableTrackerSettings);
+            m_AttackSystem = new AttackSystem(this, m_AttackSystemSettings);
         }
 
         void Update()
