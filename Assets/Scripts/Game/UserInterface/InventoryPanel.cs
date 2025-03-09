@@ -160,6 +160,13 @@ namespace Game.UserInterface
                     if (draggablePanel.dragStoppedTimestamp == Time.time
                         && draggablePanel.previousDraggableControl is ItemSlotControl draggedItemSlot)
                     {
+                        if (draggedItemSlot.category != EquipmentItems.Category.None
+                            && itemSlot.item != null
+                            && itemSlot.item.category != draggedItemSlot.category)
+                        {
+                            return;
+                        }
+
                         (itemSlot.item, draggedItemSlot.item) = (draggedItemSlot.item, itemSlot.item);
                         itemTooltipPanel.tooltip.item = itemSlot.item;
                         itemTooltipPanel.tooltip.compareItem = itemSlot.item != null ? equipmentPanel.GetItemSlot(itemSlot.item.category)?.item : null;
