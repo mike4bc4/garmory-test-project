@@ -45,6 +45,9 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:VisualElement name="ObjectivePanelContainer" picking-mode="Ignore" style="position: absolute; left: 0; top: 0; bottom: 0; right: 0; margin-top: 80px; margin-bottom: 200px; margin-left: 16px;">
+            <ui:VisualElement name="ObjectivePanel" style="flex-grow: 1; width: 300px;" />
+        </ui:VisualElement>
         <ui:VisualElement name="DraggablePanel" picking-mode="Ignore" style="position: absolute; left: 0; top: -1px; right: 0; bottom: 1px;" />
         <ui:VisualElement name="FloatersPanel" picking-mode="Ignore" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
     </ui:VisualElement>

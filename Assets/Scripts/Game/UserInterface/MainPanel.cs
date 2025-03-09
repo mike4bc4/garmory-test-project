@@ -41,6 +41,13 @@ namespace Game.UserInterface
             get => m_FloatersPanel;
         }
 
+        ObjectivePanel m_ObjectivePanel;
+
+        public ObjectivePanel objectivePanel
+        {
+            get => m_ObjectivePanel;
+        }
+
         public MainPanel(UserInterfaceManager uiManager, VisualElement rootElement) : base(rootElement)
         {
             m_UIManager = uiManager;
@@ -52,6 +59,7 @@ namespace Game.UserInterface
 
             m_DraggablePanel = new DraggablePanel(this, rootElement.Q("DraggablePanel"));
             m_FloatersPanel = new FloatersPanel(this, rootElement.Q("FloatersPanel"));
+            m_ObjectivePanel = new ObjectivePanel(this, rootElement.Q("ObjectivePanel"));
         }
 
         void OnCharacterButtonClicked()

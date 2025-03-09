@@ -275,3 +275,20 @@ VisualElement {
     background-color: rgb(0, 255, 0);
     flex-grow: 1;
 }
+
+.objective {
+}
+
+.objective__header {
+    -unity-font-style: bold;
+    border-bottom-width: 1px;
+    border-left-color: rgba(0, 0, 0, 255);
+    border-right-color: rgba(0, 0, 0, 255);
+    border-top-color: rgba(0, 0, 0, 255);
+    border-bottom-color: rgba(0, 0, 0, 255);
+    white-space: normal;
+}
+
+.objective__description {
+    white-space: normal;
+}
