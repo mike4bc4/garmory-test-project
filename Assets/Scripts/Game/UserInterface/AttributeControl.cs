@@ -11,13 +11,10 @@ using UnityEngine.UIElements;
 
 namespace Game.UserInterface
 {
-    public class AttributeControl : SelfContainedControl
+    public class AttributeControl : Control
     {
         const string k_ClassName = "attribute-control";
         const string k_ImageClassName = k_ClassName + "__image";
-        const string k_LabelClassName = k_ClassName + "__label";
-        const string k_ValueClassName = k_ClassName + "__value";
-        const string k_ValueChangeClassName = k_ClassName + "__value-change";
 
         VisualElement m_ImageElement;
         Label m_NameLabel;
@@ -50,23 +47,13 @@ namespace Game.UserInterface
 
         public AttributeControl()
         {
-            rootElement.AddToClassList(k_ClassName);
+            var templateInstance = UserInterfaceManager.Instance.attributeControl.Instantiate();
+            rootElement = templateInstance.hierarchy.Children().First();
 
-            m_ImageElement = new VisualElement();
-            m_ImageElement.AddToClassList(k_ImageClassName);
-            rootElement.Add(m_ImageElement);
-
-            m_NameLabel = new Label();
-            m_NameLabel.AddToClassList(k_LabelClassName);
-            rootElement.Add(m_NameLabel);
-
-            m_ValueLabel = new Label();
-            m_ValueLabel.AddToClassList(k_ValueClassName);
-            rootElement.Add(m_ValueLabel);
-
-            m_ValueChangeLabel = new Label() { name = "ValueChange" };
-            m_ValueChangeLabel.AddToClassList(k_ValueChangeClassName);
-            rootElement.Add(m_ValueChangeLabel);
+            m_ImageElement = rootElement.Q("AttributeImage");
+            m_NameLabel = rootElement.Q<Label>("NameLabel");
+            m_ValueLabel = rootElement.Q<Label>("ValueLabel");
+            m_ValueChangeLabel = rootElement.Q<Label>("ValueCompareLabel");
 
             valueChangeVisible = true;
             compareAttribute = null;
@@ -76,7 +63,6 @@ namespace Game.UserInterface
         {
             m_Attribute = attribute;
             m_ImageElement.ClearClassList();
-            m_ImageElement.AddToClassList(k_ImageClassName);
             m_ImageElement.AddToClassList(k_ImageClassName + "--" + string.Join('-', attribute.name.Split(' ')).ToLower());
             m_NameLabel.text = attribute.name;
             m_ValueLabel.text = attribute.GetValueString();

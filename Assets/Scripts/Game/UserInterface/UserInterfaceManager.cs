@@ -10,6 +10,11 @@ namespace Game.UserInterface
     {
         static UserInterfaceManager s_Instance;
 
+        public static UserInterfaceManager Instance
+        {
+            get => s_Instance;
+        }
+
         public static MainPanel MainPanel
         {
             get => s_Instance.m_MainPanel;
@@ -23,6 +28,13 @@ namespace Game.UserInterface
         public static Vector2 PointerPosition
         {
             get => GetPointerPosition();
+        }
+
+        [SerializeField] VisualTreeAsset m_AttributeControl;
+
+        public VisualTreeAsset attributeControl
+        {
+            get => m_AttributeControl;
         }
 
         UIDocument m_UIDocument;
