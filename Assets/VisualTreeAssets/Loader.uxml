@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="MainPanel" picking-mode="Ignore" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;">
+        <ui:Button text="Play" display-tooltip-when-elided="true" name="PlayButton" style="margin-top: auto; margin-right: auto; margin-bottom: auto; margin-left: auto; width: 80px; height: 80px;" />
+        <ui:VisualElement name="LoadingCircle" style="width: 80px; height: 80px; position: absolute; bottom: 40px; right: 40px; background-image: url(&quot;project://database/Assets/Textures/UserInterface/LoadingCircle.png?fileID=2800000&amp;guid=a912c1aedba947a42b266138c06aac95&amp;type=3#LoadingCircle&quot;);" />
+    </ui:VisualElement>
+</ui:UXML>

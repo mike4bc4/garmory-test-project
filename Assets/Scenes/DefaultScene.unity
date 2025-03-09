@@ -938,6 +938,7 @@ MonoBehaviour:
   - {fileID: 449819567}
   - {fileID: 986545823}
   m_SpawnDelay: 1
+  m_EnemyContainer: {fileID: 1624372640}
 --- !u!1 &1608136479
 GameObject:
   m_ObjectHideFlags: 0
