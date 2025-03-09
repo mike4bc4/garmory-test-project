@@ -117,7 +117,7 @@ namespace Game.UserInterface
                 itemSlot.OnDestroy();
             }
 
-            m_ItemSlots.Clear();   
+            m_ItemSlots.Clear();
         }
 
         void RebuildInventory()
@@ -161,6 +161,8 @@ namespace Game.UserInterface
                         && draggablePanel.previousDraggableControl is ItemSlotControl draggedItemSlot)
                     {
                         (itemSlot.item, draggedItemSlot.item) = (draggedItemSlot.item, itemSlot.item);
+                        itemTooltipPanel.tooltip.item = itemSlot.item;
+                        itemTooltipPanel.tooltip.compareItem = itemSlot.item != null ? equipmentPanel.GetItemSlot(itemSlot.item.category)?.item : null;
                     }
                 };
 

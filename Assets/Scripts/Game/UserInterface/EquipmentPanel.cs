@@ -97,7 +97,7 @@ namespace Game.UserInterface
                     {
                         draggablePanel.draggableControl = itemSlot;
                     }
-                    
+
                     itemTooltipPanel.tooltip.item = null;
                     itemTooltipPanel.tooltip.compareItem = null;
                 };
@@ -109,6 +109,8 @@ namespace Game.UserInterface
                         && draggedItemSlot.item.category == itemSlot.category)
                     {
                         (itemSlot.item, draggedItemSlot.item) = (draggedItemSlot.item, itemSlot.item);
+                        itemTooltipPanel.tooltip.item = itemSlot.item;
+                        itemTooltipPanel.tooltip.compareItem = itemSlot.item;
                     }
                 };
 
