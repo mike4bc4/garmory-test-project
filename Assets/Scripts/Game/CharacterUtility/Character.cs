@@ -9,8 +9,8 @@ namespace Game.CharacterUtility
     {
         [SerializeField] MovementSystem.Settings m_MovementSystemSettings;
         [SerializeField] InteractableTracker.Settings m_InteractableTrackerSettings;
-
         [SerializeField] AttackSystem.Settings m_AttackSystemSettings;
+        [SerializeField] AnimationSystem.Settings m_AnimationSystemSettings;
 
         Inventory m_Inventory;
 
@@ -47,6 +47,13 @@ namespace Game.CharacterUtility
             get => m_AttackSystem;
         }
 
+        AnimationSystem m_AnimationSystem;
+
+        public AnimationSystem animationSystem
+        {
+            get => m_AnimationSystem;
+        }
+
         List<Attribute> m_Attributes;
 
         public IReadOnlyList<Attribute> attributes
@@ -63,6 +70,8 @@ namespace Game.CharacterUtility
             m_MovementSystem = new MovementSystem(this, m_MovementSystemSettings);
             m_InteractableTracker = new InteractableTracker(this, m_InteractableTrackerSettings);
             m_AttackSystem = new AttackSystem(this, m_AttackSystemSettings);
+            m_AnimationSystem = new AnimationSystem(this, m_AnimationSystemSettings);
+            
             m_Attributes = Item.AvailableAttributes;
         }
 

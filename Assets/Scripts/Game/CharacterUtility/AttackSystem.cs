@@ -72,17 +72,22 @@ namespace Game.CharacterUtility
                 if (m_CanAttack)
                 {
                     m_CanAttack = false;
+                    character.animationSystem.Attack(settings.attackTime);
                     Scheduler.Wait(settings.attackTime, () => m_CanAttack = true);
-                    settings.slashEffect.Play();
-
-                    foreach (var enemy in GetAttackedEnemies())
+                    Scheduler.Wait(settings.attackTime * 0.33f, () =>
                     {
-                        var damage = CalculateDamage(out var isCritical);
-                        var combatText = UserInterfaceManager.MainPanel.floatersPanel.AddCombatText(enemy.transform);
-                        combatText.offset = new Vector3(0f, 2.5f, 0f);
-                        combatText.text = string.Format(isCritical ? "{0:0.#}!" : "{0:0.#}", damage);
-                        enemy.TakeDamage(damage);
-                    }
+                        foreach (var enemy in GetAttackedEnemies())
+                        {
+                            var damage = CalculateDamage(out var isCritical);
+                            var combatText = UserInterfaceManager.MainPanel.floatersPanel.AddCombatText(enemy.transform);
+                            combatText.offset = new Vector3(0f, 2.5f, 0f);
+                            combatText.text = string.Format(isCritical ? "{0:0.#}!" : "{0:0.#}", damage);
+                            enemy.TakeDamage(damage);
+                        }
+
+                        settings.slashEffect.Play();
+                    });
+
                 }
             };
         }

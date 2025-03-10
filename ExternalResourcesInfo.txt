@@ -1,0 +1,3 @@
+Character animations:
+	Link: https://www.mixamo.com/
+	License: Unknown (Mixamo online animation services are currently in a limited duration technology preview, and during that preview they are available for free, with no licensing or royalty fees, for unlimited commercial or non commercial use)

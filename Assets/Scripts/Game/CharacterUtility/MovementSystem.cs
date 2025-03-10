@@ -88,13 +88,41 @@ namespace Game.CharacterUtility
                     m_Character.transform.forward = new Vector3(forward.x, 0f, forward.z).normalized;
                     m_Character.transform.forward = ((m_Character.transform.forward * moveVector.y + m_Character.transform.right * moveVector.x) / 2f).normalized;
                     m_Character.transform.position += m_Character.transform.forward * settings.movementSpeed * Time.deltaTime;
+                    character.animationSystem.Run();
+                }
+                else
+                {
+                    character.animationSystem.Idle();
                 }
             }
             else
             {
                 var moveVector = m_MoveAction.ReadValue<Vector2>();
+                moveVector.x = Mathf.Round(moveVector.x);
+                moveVector.y = Mathf.Round(moveVector.y);
                 m_Character.transform.Rotate(Vector3.up, settings.rotationSpeed * moveVector.x * Time.deltaTime);
                 m_Character.transform.position += m_Character.transform.forward * settings.movementSpeed * moveVector.y * Time.deltaTime;
+
+                if (moveVector.y > 0)
+                {
+                    character.animationSystem.Run();
+                }
+                else if (moveVector.y < 0)
+                {
+                    character.animationSystem.RunBack();
+                }
+                else if (moveVector.x > 0)
+                {
+                    character.animationSystem.RightTurn();
+                }
+                else if (moveVector.x < 0)
+                {
+                    character.animationSystem.LeftTurn();
+                }
+                else
+                {
+                    character.animationSystem.Idle();
+                }
             }
         }
     }
