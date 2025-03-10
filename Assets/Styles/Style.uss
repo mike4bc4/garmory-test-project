@@ -13,7 +13,6 @@ VisualElement {
 .grid-container__row__cell {
     min-width: 80px;
     min-height: 80px;
-    background-color: rgb(255, 0, 255);
     margin-right: 8px;
 }
 
@@ -162,6 +161,7 @@ VisualElement {
     top: 0;
     right: 0;
     bottom: 0;
+    background-image: url("project://database/Assets/Textures/UserInterface/Frame4.png?fileID=21300000&guid=a11b9ebe34ce66144acbbfc85965d3c7&type=3#Frame4");
 }
 
 .item-slot__background {
@@ -170,8 +170,7 @@ VisualElement {
     top: 0;
     right: 0;
     bottom: 0;
-    background-color: rgb(128, 128, 128);
-    -unity-background-image-tint-color: rgba(255, 255, 255, 0.25);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.05);
 }
 
 .item-slot__background--helmet {
@@ -317,4 +316,88 @@ VisualElement {
 
 .item-tooltip__rarity--legendary {
     background-image: url("project://database/Assets/Textures/Items/Rarity/ItemRarityLegendary.png?fileID=2800000&guid=5d4d6e1bf40b87c4db405ecb536a1222&type=3#ItemRarityLegendary");
+}
+
+.button {
+    background-image: url("project://database/Assets/Textures/UserInterface/Button1.png?fileID=21300000&guid=58d9b29604869f84db88c9a989534218&type=3#Button1");
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 18px;
+}
+
+.button:hover {
+    background-image: url("project://database/Assets/Textures/UserInterface/Button2.png?fileID=21300000&guid=926df7a3aa6de0543961fe4ea3d4e5f8&type=3#Button2");
+}
+
+.button:active {
+    background-image: url("project://database/Assets/Textures/UserInterface/Button6.png?fileID=21300000&guid=7f1e993e590a8084dab8c778974e0a32&type=3#Button6");
+}
+
+.text-default {
+    color: rgb(229, 191, 0);
+    text-shadow: 1px 1px 0 rgb(51, 51, 51);
+    font-size: 16px;
+}
+
+.scroll-view .unity-base-slider__dragger {
+    background-image: url("project://database/Assets/Textures/UserInterface/Button5.png?fileID=21300000&guid=ee173ad9e78d0464e9cb24bb524f8115&type=3#Button5");
+}
+
+.bar {
+    background-image: url("project://database/Assets/Textures/UserInterface/Frame2.png?fileID=21300000&guid=84b33b848b84ba741a46cffaf6a39ecb&type=3#Frame2");
+}
+
+.scroll-view {
+}
+
+.scroll-view .unity-scroll-view__vertical-scroller {
+}
+
+.scroll-view .unity-base-slider--vertical {
+}
+
+.scroll-view .unity-scroller__low-button {
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    background-image: url("project://database/Assets/Textures/UserInterface/Button3.png?fileID=21300000&guid=53219d53342eef447b33f021671bb31b&type=3#Button3");
+    -unity-background-image-tint-color: rgba(255, 255, 255, 255);
+}
+
+.scroll-view .unity-scroller__high-button {
+    background-image: url("project://database/Assets/Textures/UserInterface/Button4.png?fileID=21300000&guid=b600c7918ab797f4f8775fb1baffa18b&type=3#Button4");
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.scroll-view .unity-base-slider__tracker {
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    background-image: url("project://database/Assets/Textures/UserInterface/Frame3.png?fileID=21300000&guid=0671656b5f90b084bb7af92b714e884e&type=3#Frame3");
+}
+
+.scroll-view .unity-base-slider__dragger {
+    background-image: url("project://database/Assets/Textures/UserInterface/Button5.png?fileID=21300000&guid=ee173ad9e78d0464e9cb24bb524f8115&type=3#Button5");
+    background-color: rgba(0, 0, 0, 0);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 255);
 }

@@ -2,35 +2,37 @@
     <Style src="project://database/Assets/Styles/Style.uss?fileID=7433441132597879392&amp;guid=59ff6ebf5aed4734baf1100afe3193de&amp;type=3#Style" />
     <ui:VisualElement name="MainPanel" picking-mode="Ignore" style="flex-grow: 1;">
         <ui:VisualElement name="FloatersPanel" picking-mode="Ignore" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0;" />
-        <ui:Button text="Char" display-tooltip-when-elided="true" name="CharacterButton" focusable="false" style="position: absolute; right: 40px; bottom: 40px; width: 80px; height: 80px;" />
+        <ui:Button text="Char" display-tooltip-when-elided="true" name="CharacterButton" focusable="false" class="button text-default" style="position: absolute; right: 40px; bottom: 40px; width: 80px; height: 80px;" />
         <ui:VisualElement name="CharacterPanelContainer" picking-mode="Ignore" style="position: absolute; right: 0; left: 0; top: 0; bottom: 0; flex-direction: row-reverse; margin-top: 80px; margin-bottom: 200px;">
-            <ui:VisualElement name="CharacterPanel" style="flex-direction: row; background-color: rgba(255, 255, 255, 0.5);">
+            <ui:VisualElement name="CharacterPanel" class="text-default" style="flex-direction: row; background-image: url(&quot;project://database/Assets/Textures/UserInterface/Frame1.png?fileID=21300000&amp;guid=2b385d8416ff3e546ad583eb898c2c35&amp;type=3#Frame1&quot;);">
                 <ui:VisualElement name="LeftPanel" style="display: flex;">
                     <ui:VisualElement name="InventoryPanel" style="flex-grow: 1; min-width: 400px; display: flex;">
-                        <ui:VisualElement name="TopBar" style="flex-direction: row; flex-shrink: 0;">
-                            <ui:Label text="Tab Name" display-tooltip-when-elided="true" name="Label" style="flex-grow: 1; -unity-text-align: middle-center;" />
-                            <ui:Button text="X" display-tooltip-when-elided="true" name="CloseButton" focusable="false" style="min-width: 40px; min-height: 40px;" />
+                        <ui:VisualElement name="TopBar" class="bar" style="flex-direction: row; flex-shrink: 0;">
+                            <ui:Label text="Inventory" display-tooltip-when-elided="true" name="Label" style="flex-grow: 1; -unity-text-align: middle-center;" />
+                            <ui:Button text="X" display-tooltip-when-elided="true" name="CloseButton" focusable="false" class="button" style="min-width: 40px; min-height: 40px;" />
                         </ui:VisualElement>
-                        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" vertical-scroller-visibility="AlwaysVisible" style="flex-grow: 1;">
+                        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" vertical-scroller-visibility="AlwaysVisible" class="scroll-view" style="flex-grow: 1;">
                             <ui:VisualElement name="GridContainer" style="flex-grow: 1;" />
                         </ui:ScrollView>
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="ControlsPanel">
-                    <ui:Button text="Inv" display-tooltip-when-elided="true" name="InventoryButton" focusable="false" style="width: 80px; height: 80px;" />
-                    <ui:Button text="Spells" display-tooltip-when-elided="true" name="SpellbookButton" focusable="false" style="min-width: 80px; min-height: 80px;" />
+                <ui:VisualElement name="ControlsPanel" style="background-image: url(&quot;project://database/Assets/Textures/UserInterface/Frame3.png?fileID=21300000&amp;guid=0671656b5f90b084bb7af92b714e884e&amp;type=3#Frame3&quot;); padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px;">
+                    <ui:Button text="Inv" display-tooltip-when-elided="true" name="InventoryButton" focusable="false" class="button" style="width: 80px; height: 80px; margin-bottom: 4px;" />
+                    <ui:Button text="Spells" display-tooltip-when-elided="true" name="SpellbookButton" focusable="false" class="button" style="min-width: 80px; min-height: 80px; margin-bottom: 4px;" />
+                    <ui:Button text="Craft" display-tooltip-when-elided="true" name="CraftingButton" focusable="false" class="button" style="min-width: 80px; min-height: 80px; margin-bottom: 4px;" />
+                    <ui:Button text="Pets" display-tooltip-when-elided="true" name="PetsButton" focusable="false" class="button" style="min-width: 80px; min-height: 80px; margin-bottom: 4px;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="RightPanel" style="min-width: 400px;">
-                    <ui:VisualElement name="TopBar" style="flex-direction: row;">
+                    <ui:VisualElement name="TopBar" class="bar" style="flex-direction: row;">
                         <ui:Label text="Character Name" display-tooltip-when-elided="true" name="Label" style="flex-grow: 1; -unity-text-align: middle-center;" />
-                        <ui:Button text="X" display-tooltip-when-elided="true" name="CloseButton" focusable="false" />
+                        <ui:Button text="X" display-tooltip-when-elided="true" name="CloseButton" focusable="false" class="button" style="min-width: 40px; min-height: 40px;" />
                     </ui:VisualElement>
                     <ui:VisualElement name="EquipmentPanel" style="flex-grow: 1;">
                         <ui:VisualElement name="GridContainer" style="flex-grow: 1;" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="AttributesPanel" style="height: 30%;">
-                        <ui:Label text="Attributes" display-tooltip-when-elided="true" name="Label" style="-unity-text-align: middle-center;" />
-                        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" vertical-scroller-visibility="AlwaysVisible" name="ScrollView" style="flex-grow: 1;">
+                    <ui:VisualElement name="AttributesPanel" style="height: 40%;">
+                        <ui:Label text="Attributes" display-tooltip-when-elided="true" name="Label" class="bar" style="-unity-text-align: middle-center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; min-height: 40px;" />
+                        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" vertical-scroller-visibility="Auto" name="ScrollView" style="flex-grow: 1;">
                             <ui:VisualElement name="AttributesContainer" />
                         </ui:ScrollView>
                     </ui:VisualElement>
