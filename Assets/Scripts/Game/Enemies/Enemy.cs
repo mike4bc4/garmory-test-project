@@ -11,12 +11,14 @@ namespace Game.Enemies
         [SerializeField] float m_MaxHealth;
         [SerializeField] float m_Health;
 
+        [SerializeField] Animator m_Animator;
+
         FloatingHealthBar m_HealthBar;
 
         void Start()
         {
             m_HealthBar = UserInterfaceManager.MainPanel.floatersPanel.AddHealthBar(transform);
-            m_HealthBar.offset = new Vector3(0f, 2.5f, 0f);
+            m_HealthBar.offset = new Vector3(0f, 2.25f, 0f);
             m_HealthBar.maxHealth = m_MaxHealth;
             m_HealthBar.health = m_Health;
         }
@@ -30,6 +32,8 @@ namespace Game.Enemies
             {
                 EnemyManager.Instance.Despawn(this);
             }
+
+            m_Animator.CrossFadeInFixedTime("Base.TakeDamage", 0.25f, 0, 0f);
         }
 
         void OnDestroy()
